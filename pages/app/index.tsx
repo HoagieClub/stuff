@@ -18,26 +18,11 @@ export default withPageAuthRequired(() => {
     }
   }, [])
 
-
-
-  const food = [
-    {title: "Main Entree", items: ["(more) Beef Stew and Rice"]},
-    {title: "Vegetarian + Vegan Entree", items: ["\"Beef\" Stew and Rice"]},
-    {title: "Soups", items: ["New England Clam (?) Chowder", "Tomato-Basil Soup"]},
-    {title: "Salad Bar", items: ["Literally Just Arugula"]}
-  ]
-
   return (
     <> 
     <Pane display="flex" flexWrap="wrap" justifyContent="center" 
     marginY={majorScale(4)}
     paddingX={majorScale(3)}>
-      <MenuCard college="Mathey" food={food} size = {2}/>
-      <MenuCard college="Whitman" food={food} />
-      <MenuCard college="First" food={food} />
-      <MenuCard college="Butler" food={food} />
-      <MenuCard college="Forbes" food={food} />
-      <MenuCard college="Graduate College" food={food} />
     </Pane>
     </>
   );
