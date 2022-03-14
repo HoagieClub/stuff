@@ -76,7 +76,7 @@ export default withPageAuthRequired(() => {
             </div>
 
             <div style={{marginRight:40, display:"flex flex-col", justifyContent:"flex-end", fontSize:15}}>
-              <div>5 days left</div>
+              <div style={{marginBottom:5}}>5 days left</div>
               <div style={{color:"grey"}}>2 standing offers</div>
             </div>
             </div>
