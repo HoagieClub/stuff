@@ -1,11 +1,12 @@
 {
-  "name": "hoagie-mail",
+  "name": "hoagie-stuff",
   "version": "0.1.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start -p $PORT"
+    "start": "next start -p $PORT",
+    "lint": "eslint . --ext .js,.jsx,.ts,.tsx"
   },
   "dependencies": {
     "@auth0/nextjs-auth0": "^1.4.2",
