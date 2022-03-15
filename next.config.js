@@ -1,5 +1,5 @@
 module.exports = {
-    target: "serverless",
+    target: 'serverless',
     env: {
         AUTH0_SECRET: process.env.AUTH0_SECRET,
         AUTH0_BASE_URL: process.env.AUTH0_BASE_URL,

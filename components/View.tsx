@@ -1,4 +1,4 @@
-import { Pane } from "evergreen-ui";
+import { Pane } from 'evergreen-ui';
 
 // View is an extremely simple component to make sure that the layout is consistent
 export default function View({ children }) {
