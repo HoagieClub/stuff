@@ -12,6 +12,7 @@ export default function View({ children }) {
             <Pane
                 width="100%"
                 maxWidth="1200px"
+                paddingX={40}
             >
                 { children }
             </Pane>

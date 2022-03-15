@@ -1,6 +1,6 @@
 import {useEffect, useState} from 'react';
 import { Pane, Button, Checkbox } from "evergreen-ui";
-import { TileModel } from './Tile';
+import { TileData } from './Tile';
 
 // CheckboxModel is an abstraction which incorporates checkbox state and label
 class CheckboxModel {
@@ -81,10 +81,10 @@ export default function Filter({data, onFilter}) {
             return;
         }
 
-        let dataFiltering = (data: TileModel) => {
+        let dataFiltering = (data: TileData) => {
             for (let i = 0; i < filterLength; i++) {
                 // Enforce lower case representation of categories
-                const tagNames = data.tagNames.map(name => name.toLowerCase());
+                const tagNames = data.tags.map(name => name.toLowerCase());
                 const typeName = ((data.type.toLowerCase().valueOf() == "selling" || data.type.toLowerCase().valueOf() == "student sale") ? "marketplace" : data.type.toLowerCase());
 
                 if (tagNames.includes(filterCheckboxes[i].label.toLowerCase()) || typeName.valueOf() == filterCheckboxes[i].label.toLowerCase().valueOf()) {
@@ -96,7 +96,7 @@ export default function Filter({data, onFilter}) {
         }
 
         // Filter data according to checkboxes
-        const filteredData = data.filter((data: TileModel) => dataFiltering(data));
+        const filteredData = data.filter((data: TileData) => dataFiltering(data));
         onFilter(filteredData);
     }
 
@@ -118,7 +118,7 @@ export default function Filter({data, onFilter}) {
 
     return (  
         <div>
-            <Pane backgroundColor="white" borderRadius={20} width={250} marginTop={25} display="flex" justifyContent="flex-start" flexDirection="column" paddingTop={10} paddingBottom={20} position ="relative" flexWrap="wrap" marginRight={20} >
+            <Pane backgroundColor="white" borderRadius={10} width={250} marginTop={25} display="flex" justifyContent="flex-start" flexDirection="column" paddingTop={10} paddingBottom={20} position ="relative" flexWrap="wrap" marginRight={20} >
                 <Pane marginTop={20} marginLeft = {20} display="flex" flexDirection="column" alignItems="flex-start" >
                     <span style={{fontSize:"30px"}}><b>Filter</b></span>
 

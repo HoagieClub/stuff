@@ -3,7 +3,7 @@ import { Pane, SearchInput, Button } from "evergreen-ui";
 export default function SearchBar () {
     return (
         <Pane>
-            <Pane backgroundColor="white" borderRadius={20} width={800} marginTop={40} height={150} display="flex" justifyContent="center" flexDirection="column" alignItems= "flex-start" paddingTop={10} paddingLeft={20}>
+            <Pane backgroundColor="white" borderRadius={10} marginTop={40} height={150} display="flex" justifyContent="center" flexDirection="column" alignItems= "flex-start" paddingTop={10} paddingLeft={20}>
                 <Pane display="flex" flexDirection="column" alignItems="flex-start" width="100%" textAlign="left" >
                     <span style={{ fontSize: "30px" }}><b>Items for Sale</b></span>
                 </Pane>
