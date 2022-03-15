@@ -1,4 +1,4 @@
-import { Pane, Badge } from "evergreen-ui";
+import { Pane, Badge } from 'evergreen-ui';
 
 // TileModel organizes all relevant properties for individual tile
 interface TileData {
@@ -13,28 +13,37 @@ interface TileData {
 
 export type { TileData }
 
-export default function Tile ({ tile }) {
+export default function Tile({ tile }) {
     return (
         <Pane>
-            <Pane 
-                backgroundColor="white" 
-                borderRadius={10} 
-                width={250} 
-                marginTop={20} 
+            <Pane
+                backgroundColor="white"
+                borderRadius={10}
+                width={250}
+                marginTop={20}
                 display="flex"
-                paddingTop={10} 
+                paddingTop={10}
                 paddingBottom={20}
-                position ="relative"
+                position="relative"
                 flexWrap="wrap"
             >
-                <Badge marginLeft={0} fontSize = {15}>{tile.type}</Badge>
-                <Pane marginTop={20} display="flex" flexDirection="column" alignItems="flex-start">
-                    <span style={{fontSize:"20px"}}><b>{tile.title}</b></span>
-                    <span style={{fontSize:"15px"}} ><b>${tile.amt}</b></span>
+                <Badge marginLeft={0} fontSize={15}>{tile.type}</Badge>
+                <Pane
+                    marginTop={20}
+                    display="flex"
+                    flexDirection="column"
+                    alignItems="flex-start"
+                >
+                    <span style={{ fontSize: '20px' }}><b>{tile.title}</b></span>
+                    <span style={{ fontSize: '15px' }}><b>${tile.amt}</b></span>
                     <img id="listingImage" src={tile.thumbnail} alt={tile.title} />
-                    <Pane paddingTop = {10}>
+                    <Pane paddingTop={10}>
                         {tile.tags.map(
-                            (tag: string) => <Badge marginLeft={0} fontSize = {15}>{tag}</Badge>
+                            (tag: string) => (
+                                <Badge marginLeft={0} fontSize={15}>
+                                    {tag}
+                                </Badge>
+                            ),
                         )}
                     </Pane>
                 </Pane>
