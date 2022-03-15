@@ -68,8 +68,11 @@ function Theme({palette="purple", children}:ThemeProps) {
       purple600: "#6E62B6",
       purple100: "#E7E4F9",
       teal800: "#0F5156",
+      teal300: "#7CE0E6",
       teal100: "#D3F5F7",
       yellow800: "#66460D",
+      yellow300: "#FFD079",
+      yellow200: "#FFDFA6",
       yellow100: "#FFEFD2",
       muted: "#808080",
       default: "#343434",
@@ -277,6 +280,80 @@ function Theme({palette="purple", children}:ThemeProps) {
     },
   }
 
+  const hoagieGray = {
+    ...hoagieUI,  
+    title: "purple",
+    colors: {
+      ...hoagieUI.colors,
+      blue900: "#000000",
+      blue800: "#343434",
+      blue700: "#696f8c",
+      blue600: "#474d66",
+      blue500: "#696f8c",
+      blue400: "#D2D2D2",
+      blue300: "#EEEEEE",
+      blue200: "#F1F1F1",
+      blue100: "#E5E5E5",
+      blue90: "#FBFBFB",
+      blue75: "#FCFCFC",
+      blue50: "#FFFFFF",
+      // Real Blue
+      rblue300: "#85A3FF",
+      selected: "#8F59EF",
+      tint1: "#FCFAFF",
+      tint2: "#FAF9FC",
+      border: {
+          default: "#EEEEEE",
+          muted: "#F1F1F1"
+      },
+      icon: {
+          default: "#808080",
+          muted: "#D2D2D2",
+          disabled: "#D2D2D2",
+          selected: "#8F59EF"
+      },
+      text: {
+          danger: "#D14343",
+          success: "#52BD95",
+          info: "#8F59EF"
+      },
+    },
+    intents: {
+      info: {
+          background: "#F9F5FF",
+          border: "#8F59EF",
+          text: "#6C47AE",
+          icon: "#8F59EF"
+      },
+      success: {
+          background: "#F5FBF8",
+          border: "#52BD95",
+          text: "#317159",
+          icon: "#52BD95"
+      },
+      warning: {
+          background: "#FFFAF2",
+          border: "#FFB020",
+          text: "#996A13",
+          icon: "#FFB020"
+      },
+      danger: {
+          background: "#FDF4F4",
+          border: "#D14343",
+          text: "#A73636",
+          icon: "#D14343"
+      }
+    },
+    shadows: {
+      0: "0 0 1px rgba(100, 100, 100, 0.3)",
+      1: "0 0 1px rgba(100, 100, 100, 0.3), 0 2px 4px -2px rgba(100, 100, 100, 0.47)",
+      2: "0 0 1px rgba(100, 100, 100, 0.3), 0 5px 8px -4px rgba(100, 100, 100, 0.47)",
+      3: "0 0 1px rgba(100, 100, 100, 0.3), 0 8px 10px -4px rgba(100, 100, 100, 0.47)",
+      4: "0 0 1px rgba(100, 100, 100, 0.3), 0 16px 24px -8px rgba(100, 100, 100, 0.47)",
+      focusRing: "0 0 0 2px #E9DDFE"
+    },
+  }
+
   const hoagieOrange = {
     ...hoagieUI,  
     title: "orange",
@@ -358,6 +435,9 @@ function Theme({palette="purple", children}:ThemeProps) {
     case 'orange':
       colorTheme = hoagieOrange;
       break;
+    case 'gray':
+        colorTheme = hoagieGray;
+        break;
     default:
       colorTheme = hoagieUI;
   }
