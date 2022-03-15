@@ -1,133 +1,119 @@
-import {useEffect, useState} from 'react';
-import { Pane, Button, Checkbox } from "evergreen-ui";
+import { useState } from 'react';
+import {
+    Pane, Button, Checkbox, Text,
+} from 'evergreen-ui';
 import { TileData } from './Tile';
 
-// CheckboxModel is an abstraction which incorporates checkbox state and label
-class CheckboxModel {
-    checked: boolean;
-    label: string;
-
-    constructor(checked: boolean, label: string) {
-        this.checked = checked;
-        this.label = label;
-    }
+function objMap(obj:any, func:any) {
+    return Object.fromEntries(Object.entries(obj).map(([k, v]) => [k, func(k, v)]));
 }
 
-export default function Filter({data, onFilter}) {
-    
-    // Setup checkboxes for each filter section
-    const [typeCheckboxes, setTypeCheckboxes] = useState([]);
-    const [bulletinCheckboxes, setBulletinCheckboxes] = useState([]);
-    const [marketCheckboxes, setMarketCheckboxes] = useState([]);
-    const [lostfoundCheckboxes, setLostFoundCheckboxes] = useState([]);
+// eslint-disable-next-line no-unused-vars
+type FilterPair = [{ label: string, checked: boolean}, (e:any) => void];
 
-    // Helper function for generating CheckboxModel lists
-    const generateCheckboxModelList = (labels: string[]) => {
-        return labels.map(label => new CheckboxModel(false, label));
-    }
+interface FilterObject {
+    [key: string]: FilterPair[];
+}
 
+export default function Filter({ data, onFilter }) {
     // Pre-set categories
-    const typeLabels = ["Marketplace", "Bulletin", "Lost & Found"];
-    const bulletinLabels = ["Opportunity", "Help"];
-    const marketLabels = ["Clothing", "Electronics", "School", "Furniture", "Accessories"];
-    const lostfoundLabels = ["Lost", "Found"];
-
-    // Setup code for initializing the checkboxes
-    useEffect(() => {
-        setTypeCheckboxes(generateCheckboxModelList(typeLabels));
-        setBulletinCheckboxes(generateCheckboxModelList(bulletinLabels));
-        setMarketCheckboxes(generateCheckboxModelList(marketLabels));
-        setLostFoundCheckboxes(generateCheckboxModelList(lostfoundLabels));
-    }, []);
-       
-    // Allow element-level changes in state
-    const setChecked = (state: boolean, category: string, index: number) => {
-        switch(category) {
-            case 'Type':
-                const newType = [...typeCheckboxes];
-                newType[index].checked = state;
-                setTypeCheckboxes(newType);
-                break;
-            case 'Bulletin':
-                const newBulletin = [...bulletinCheckboxes];
-                newBulletin[index].checked = state;
-                setBulletinCheckboxes(newBulletin);
-                break;
-            case 'Marketplace':
-                const newMarket = [...marketCheckboxes];
-                newMarket[index].checked = state;
-                setMarketCheckboxes(newMarket);
-                break;
-            case 'Lost & Found':
-                const newLostFound = [...lostfoundCheckboxes];
-                newLostFound[index].checked = state;
-                setLostFoundCheckboxes(newLostFound);
-                break;
-            default:
-                console.log("This should never occur.");
-        }
+    const labels = {
+        Type: ['Marketplace', 'Bulletin', 'Lost & Found'],
+        Bulletin: ['Opportunity', 'Help'],
+        Marketplace: ['Clothing', 'Electronics', 'School', 'Furniture', 'Accessories'],
+        'Lost & Found': ['Lost', 'Found'],
     }
-    
+
+    const filters:FilterObject = objMap(
+        labels, (_, v) => v.map((label:string) => useState({ checked: false, label })),
+    )
+
     // Filter function; find data which matches currently highlighted checkboxes
     const filter = () => {
-        const allCheckboxes = typeCheckboxes.concat(bulletinCheckboxes, marketCheckboxes, lostfoundCheckboxes);
+        const allCheckboxes = Object.values(filters).flat()
 
         // Get list of highlighted checkboxes
-        const filterCheckboxes = allCheckboxes.filter(checkbox => checkbox.checked == true);
-        const filterLength = filterCheckboxes.length;
+        const filterCheckboxes = allCheckboxes.filter(
+            (checkbox) => checkbox[0].checked === true,
+        );
 
-        if (filterLength == 0){
+        if (filterCheckboxes.length === 0) {
             onFilter(data);
             return;
         }
 
-        let dataFiltering = (data: TileData) => {
-            for (let i = 0; i < filterLength; i++) {
-                // Enforce lower case representation of categories
-                const tagNames = data.tags.map(name => name.toLowerCase());
-                const typeName = ((data.type.toLowerCase().valueOf() == "selling" || data.type.toLowerCase().valueOf() == "student sale") ? "marketplace" : data.type.toLowerCase());
-
-                if (tagNames.includes(filterCheckboxes[i].label.toLowerCase()) || typeName.valueOf() == filterCheckboxes[i].label.toLowerCase().valueOf()) {
-                    return true;
+        // TODO: switch to useSWR update. This does not work.
+        const filteredData = data.filter((
+            (tile: TileData) => {
+                for (let i = 0; i < allCheckboxes.length; i += 1) {
+                    const checkbox = allCheckboxes[i];
+                    if (checkbox[0].checked === true) {
+                        return tile.tags.includes(checkbox[0].label);
+                    }
+                    return !tile.tags.includes(checkbox[0].label);
                 }
+                return true;
             }
-
-            return false;
-        }
-
-        // Filter data according to checkboxes
-        const filteredData = data.filter((data: TileData) => dataFiltering(data));
+        ))
+        // // // Filter data according to checkboxes
+        // // const filteredData = data.filter((data: TileData) => dataFiltering(data));
         onFilter(filteredData);
     }
 
     // Helper function for generating UI representation of checkboxes
-    const generateCheckboxUI = (title: string, checkboxes: CheckboxModel[]) => {
-        return(
-            <Pane marginTop = {20}>
-                <span style={{fontSize:"20px"}} ><b>{ title }</b></span>
-                {checkboxes.map((item: CheckboxModel, index) => <Checkbox label = { item.label } checked = { item.checked } onChange={e => setChecked(e.target.checked, title, index)}/>)}
-            </Pane>
-        );
-    }
+    const generateCheckboxUI = (title: string, f:FilterPair[]) => (
+        <Pane marginTop={20}>
+            <Text fontSize={20}><b>{ title }</b></Text>
+            {f.map(([item, setItem]) => (
+                <Checkbox
+                    label={item.label}
+                    checked={item.checked}
+                    onChange={(e) => setItem({
+                        checked: e.target.checked,
+                        label: item.label,
+                    })}
+                />
+            ))}
+        </Pane>
+    )
 
-    // UI representation of checkboxes
-    const typeFilter = generateCheckboxUI("Type", typeCheckboxes);
-    const bulletinFilter = generateCheckboxUI("Bulletin", bulletinCheckboxes);
-    const marketFilter = generateCheckboxUI("Marketplace", marketCheckboxes);
-    const lostfoundFilter = generateCheckboxUI("Lost & Found", lostfoundCheckboxes);
-
-    return (  
+    return (
         <div>
-            <Pane backgroundColor="white" borderRadius={10} width={250} marginTop={25} display="flex" justifyContent="flex-start" flexDirection="column" paddingTop={10} paddingBottom={20} position ="relative" flexWrap="wrap" marginRight={20} >
-                <Pane marginTop={20} marginLeft = {20} display="flex" flexDirection="column" alignItems="flex-start" >
-                    <span style={{fontSize:"30px"}}><b>Filter</b></span>
-
-                    { typeFilter }
-                    { bulletinFilter }
-                    { marketFilter }
-                    { lostfoundFilter }
-                    
-                    <Button onClick={() => filter()} size="large" appearance="primary" float="right" marginLeft ={20}> Filter </Button> 
+            <Pane
+                backgroundColor="white"
+                borderRadius={10}
+                width={250}
+                marginTop={25}
+                display="flex"
+                justifyContent="flex-start"
+                flexDirection="column"
+                paddingTop={10}
+                paddingBottom={20}
+                position="relative"
+                flexWrap="wrap"
+                marginRight={20}
+            >
+                <Pane
+                    marginTop={20}
+                    marginLeft={20}
+                    display="flex"
+                    flexDirection="column"
+                    alignItems="flex-start"
+                >
+                    <Text fontSize={40}><b>Filter</b></Text>
+                    {
+                        Object.entries(filters).map(
+                            ([title, boxes]) => generateCheckboxUI(title, boxes),
+                        )
+                    }
+                    <Button
+                        onClick={() => filter()}
+                        size="large"
+                        appearance="primary"
+                        float="right"
+                        marginLeft={20}
+                    > Filter
+                    </Button>
                 </Pane>
             </Pane>
         </div>
