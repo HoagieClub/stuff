@@ -78,6 +78,22 @@ export default function Index() {
                 </Pane>
             </Pane>
           </Button></Link><br />
+          <Link href='/bulletin'>
+          <Button
+            height={56}
+            width={majorScale(35)}
+            appearance="default"
+            marginTop={20}
+            iconBefore={ArrowLeftIcon}
+          >
+              <Pane display="flex" className="hoagie">
+                Go to
+                <Pane marginLeft={minorScale(1)}>
+                    Bulletin
+                </Pane>
+            </Pane>
+          </Button> 
+          </Link>
           </Pane>
         </div>
         </Pane>
