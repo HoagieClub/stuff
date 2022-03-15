@@ -11,7 +11,7 @@ function Content({ Component, pageProps }) {
   const user = useUser();
 
   return (
-      <Theme palette="blue">
+      <Theme palette="gray">
           <Layout>
               <Nav name="stuff" user={user} />
               <Component {...pageProps} />

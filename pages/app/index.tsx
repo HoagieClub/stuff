@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { majorScale, Pane } from 'evergreen-ui';
 import { withPageAuthRequired } from '@auth0/nextjs-auth0';
-import MenuCard from '../../components/MenuCard';
 import router from "next/router";
 
 export default withPageAuthRequired(() => {

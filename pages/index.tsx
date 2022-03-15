@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import { useRouter } from 'next/router'
 import { useUser } from '@auth0/nextjs-auth0'
-import { Pane, majorScale, minorScale, Spinner, ArrowLeftIcon, Button, WarningSignIcon } from 'evergreen-ui'
+import { Pane, majorScale, minorScale, Spinner, ArrowLeftIcon, Button, WarningSignIcon, DragHandleHorizontalIcon } from 'evergreen-ui'
 import Link from 'next/link'
 import AuthButton from '../lib/hoagie-ui/AuthButton'
 
@@ -52,10 +52,25 @@ export default function Index() {
             width="100%"
             paddingX="10px"
             paddingTop={majorScale(5)}
-            paddingBottom={majorScale(7)}>
-            <WarningSignIcon size={100} color="warning"/>
-            <h1 className="hoagie">hoagie<b>menus</b></h1>
-          <p>Development Version</p>
+            paddingBottom={majorScale(7)}
+          >
+            <Pane
+              width="100%"
+              display="flex"
+              justifyContent="center"
+              marginBottom={-30}
+            >
+            <Pane 
+              width={200}
+            >
+              <DragHandleHorizontalIcon size={100} color="red300" /> 
+              <DragHandleHorizontalIcon size={100} color="rblue300" />
+              <DragHandleHorizontalIcon marginTop={-50} size={100} color="yellow300" />
+              <DragHandleHorizontalIcon marginTop={-50} size={100} color="green300" />
+            </Pane> 
+            </Pane>
+          <h1 className="hoagie">All the <b>stuff</b> in one place.</h1>
+          <p>From sales to lost & found and beyond.</p>
           <div>
           <Pane 
             display="flex"

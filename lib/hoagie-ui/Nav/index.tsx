@@ -25,9 +25,27 @@ const Nav = ({name, logoComponent, tabs=[], user, beta=false}:NavProps) => {
     const router = useRouter();
     const username = (user === undefined || user.user === undefined || user.isLoading) ? "Tammy Tiger" : user.user.name;
 
+    const rainbow = [
+        "red300",
+        "yellow300",
+        "green300",
+        "teal300",
+        "rblue300",
+    ]
+
     return (
         <Pane elevation={1}>
-            <Pane width="100%" height={20} background="blue500"></Pane>
+            <Pane 
+                width="100%" 
+                height={20} 
+                background="blue400" 
+                display="flex"
+                flexDirection="row"
+            >
+                {
+                    rainbow.map((color) => <Pane width="20%" height={20} background={color}></Pane>)
+                }
+            </Pane>
             <Pane display="flex" justifyContent="center" width="100%" height={majorScale(9)} background="white">
                 <Pane 
                     display="flex" 
@@ -41,7 +59,16 @@ const Nav = ({name, logoComponent, tabs=[], user, beta=false}:NavProps) => {
                 >
                     <Link href="/">
                         <Pane cursor="pointer" className="hoagie">
-                            {logoComponent ? logoComponent : <Pane>hoagie<b>{name}</b>
+                            {logoComponent ? logoComponent : <Pane>hoagie<b>
+                                {name.split("").map((l,i) => 
+                                <Text 
+                                    fontSize={24}
+                                    fontWeight="bold"
+                                    fontFamily="Nunito"
+                                    color={rainbow[i]}>
+                                    {l}
+                                </Text>)}
+                            </b>
                             {beta && <Text className="beta" color="blue400">beta</Text>}</Pane>}
                         </Pane>
                     </Link>
@@ -50,7 +77,7 @@ const Nav = ({name, logoComponent, tabs=[], user, beta=false}:NavProps) => {
                         {tabs.map((tab) => (
                             <Link href={tab.href} passHref>
                                 <Tab key={tab.title} is="a" id={tab.title}
-                                isSelected={router ? router.pathname === tab.href : false} appearance="navbar">
+                                isSelected={router ? router.pathname === tab.href : false}>
                                 {tab.title}
                                 </Tab>
                             </Link>
