@@ -1,4 +1,4 @@
-name: CI
+name: Hoagie Lint
 on: pull_request
 jobs:
   build:
