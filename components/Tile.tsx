@@ -1,18 +1,5 @@
 import { Pane, Badge } from 'evergreen-ui';
 
-// TileModel organizes all relevant properties for individual tile
-interface TileData {
-    id: string;
-    title: string;
-    description: string;
-    type: string;
-    thumbnail: string;
-    amt: number;
-    tags: string[];
-}
-
-export type { TileData }
-
 export default function Tile({ tile }) {
     return (
         <Pane>
