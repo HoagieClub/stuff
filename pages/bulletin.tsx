@@ -4,28 +4,34 @@ import Filter from '../components/Filter';
 import Tile from '../components/Tile';
 import SearchBar from '../components/SearchBar';
 import View from '../components/View';
-import { PostData } from '../components/types';
+import { PostData, UserData } from '../types';
 
 export default function BulletinBoard() {
     // TODO: Mandate all tags expressed internally through lowercase;
     // this will be obtained from backend
+    const user : UserData = {
+        email: 'hoagie@princeton.edu',
+        name: 'Hoagie',
+    }
     const tile1 : PostData = {
         id: 'product1',
-        type: 'Student Sale',
+        type: 'sale',
         thumbnail: 'https://i.ebayimg.com/images/g/pUEAAOSwNjJdgndO/s-l300.jpg',
         title: 'Princeton mug',
         description: '',
         link: '',
-        tags: ['Appliances', 'Furniture'],
+        tags: ['opportunities'],
+        user,
     }
     const tile2 : PostData = {
         id: 'product2',
-        type: 'Student Sale',
+        type: 'lost',
         thumbnail: 'https://i.ebayimg.com/images/g/pUEAAOSwNjJdgndO/s-l300.jpg',
-        title: 'Princeton mug',
-        description: '',
+        title: 'Lost my mug',
+        description: 'Not sure what to do',
         link: '',
-        tags: ['Appliances', 'Furniture'],
+        tags: ['lost'],
+        user,
     }
     const allData : PostData[] = [];
     allData.push(tile1);
