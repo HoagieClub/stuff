@@ -27,7 +27,12 @@ export default function Tile({ tile }) {
                 position="relative"
                 flexWrap="wrap"
             >
-                <Badge marginLeft={0} fontSize={15}>{tile.type}</Badge>
+                <Badge
+                    marginLeft={0}
+                    fontSize={15}
+                    color="green"
+                >{tile.type}
+                </Badge>
                 <Pane
                     marginTop={20}
                     display="flex"
@@ -40,7 +45,7 @@ export default function Tile({ tile }) {
                     <Pane paddingTop={10}>
                         {tile.tags.map(
                             (tag: string) => (
-                                <Badge marginLeft={0} fontSize={15}>
+                                <Badge marginLeft={0} fontSize={15} color="blue">
                                     {tag}
                                 </Badge>
                             ),
