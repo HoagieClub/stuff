@@ -9,12 +9,16 @@ import '../lib/hoagie-ui/theme.css';
 
 function Content({ Component, pageProps }) {
     const user = useUser();
-    const tabs = [{href: '/home', title: "Home"}, {href: '/about', title: "About"}, {href: '/logout', title: "Logout"}] 
+    const tabs = [
+        { href: '/home', title: 'Home' },
+        { href: '/about', title: 'About' },
+        { href: '/logout', title: 'Logout' },
+    ]
 
     return (
         <Theme palette="gray">
             <Layout>
-                <Nav name="stuff" tabs= {tabs} user={user} />
+                <Nav name="stuff" tabs={tabs} user={user} />
                 <Component {...pageProps} />
                 <Footer />
             </Layout>
