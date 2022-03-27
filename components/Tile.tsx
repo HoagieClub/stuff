@@ -45,7 +45,10 @@ export default function Tile({ tile }) {
                     <span style={{ fontSize: '20px' }}><b>{tile.title}</b></span>
                     <span style={{ fontSize: '15px' }}><b>${tile.amt}</b></span>
                     <img id="listingImage" src={tile.thumbnail} alt={tile.title} />
-                    <Pane paddingTop={15} fontSize='15px'>
+                    <Pane
+                        paddingTop={15}
+                        fontSize="15px"
+                    >
                         {tile.description}
                     </Pane>
                     <Pane paddingTop={10}>
@@ -58,12 +61,21 @@ export default function Tile({ tile }) {
                         )}
                     </Pane>
                 </Pane>
-                <Button marginLeft={12} marginTop={15} size="medium"
-                    iconBefore={ArrowTopRightIcon}>
+                <Button
+                    marginLeft={12}
+                    marginTop={15}
+                    size="medium"
+                    iconBefore={ArrowTopRightIcon}
+                >
                     {b1text}
                 </Button>
-                <Button marginLeft={10} marginTop={15} marginRight={12}
-                    size="medium" iconBefore={InfoSignIcon}>
+                <Button
+                    marginLeft={10}
+                    marginTop={15}
+                    marginRight={12}
+                    size="medium"
+                    iconBefore={InfoSignIcon}
+                >
                     Read More
                 </Button>
             </Pane>
