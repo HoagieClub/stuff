@@ -14,6 +14,7 @@ export default function Tile({ tile }) {
     } else {
         col = 'yellow';
     }
+    const colData: any = col;
 
     // Buttons
     let b1text = '';
@@ -36,7 +37,7 @@ export default function Tile({ tile }) {
                 position="relative"
                 flexWrap="wrap"
             >
-                <Badge color={col} marginLeft={12} fontSize={15}>{tile.type}</Badge>
+                <Badge color={colData} marginLeft={12} fontSize={15}>{tile.type}</Badge>
                 <Pane
                     marginTop={20}
                     marginLeft={12}
@@ -56,7 +57,7 @@ export default function Tile({ tile }) {
                     <Pane paddingTop={10}>
                         {tile.tags.map(
                             (tag: string) => (
-                                <Badge color={col} fontSize={15}>
+                                <Badge color={colData} fontSize={15}>
                                     {tag}
                                 </Badge>
                             ),
