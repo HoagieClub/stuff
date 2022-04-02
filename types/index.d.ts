@@ -24,5 +24,16 @@ interface PostData {
     user: UserData;
 }
 
+interface MailData{
+    // Sender (individual or student club)
+    // focus on first three 
+    sender: string;
+    title: string;
+    email: string;
+    // Could be different from sender 
+    name: string;
+    content: string;
+}
+
 export default {}
-export type { PostData, UserData }
+export type { PostData, UserData, MailData }
