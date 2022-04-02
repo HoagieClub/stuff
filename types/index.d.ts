@@ -26,11 +26,11 @@ interface PostData {
 
 interface MailData{
     // Sender (individual or student club)
-    // focus on first three 
+    // focus on first three
     sender: string;
     title: string;
     email: string;
-    // Could be different from sender 
+    // Could be different from sender
     name: string;
     content: string;
 }
