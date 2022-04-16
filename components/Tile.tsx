@@ -2,23 +2,18 @@ import {
     Pane, Badge, Button, InfoSignIcon, ArrowTopRightIcon,
 } from 'evergreen-ui';
 
-export default function Tile({ tile }) {
-    // assign colors to badges
-    let col = '';
-    if (tile.type === 'Student Sale') {
-        col = 'red';
-    } else if (tile.type === 'Lost & Found') {
-        col = 'green';
-    } else if (tile.type === 'Bulletin') {
-        col = 'purple';
-    } else {
-        col = 'yellow';
-    }
-    const colData: any = col;
+// Badge colors
+const typeToColor = new Map([
+    ['Student Sale', 'red'],
+    ['Lost & Found', 'green'],
+    ['Bulletin', 'purple'],
+    ['Selling', 'yellow']
+])
 
+export default function Tile({ tile }) {
     // Buttons
     let b1text = '';
-    if (col === 'red') {
+    if (tile.type === 'Student Sale') {
         b1text = 'Open Slides';
     } else {
         b1text = 'Contact';
@@ -37,7 +32,12 @@ export default function Tile({ tile }) {
                 position="relative"
                 flexWrap="wrap"
             >
-                <Badge color={colData} marginLeft={12} fontSize={15}>{tile.type}</Badge>
+                <Badge
+                    color={typeToColor.get(tile.type)}
+                    marginLeft={12}
+                    fontSize={15}
+                >{tile.type}
+                </Badge>
                 <Pane
                     marginTop={20}
                     marginLeft={12}
@@ -57,7 +57,7 @@ export default function Tile({ tile }) {
                     <Pane paddingTop={10}>
                         {tile.tags.map(
                             (tag: string) => (
-                                <Badge color={colData} fontSize={15}>
+                                <Badge color={typeToColor.get(tile.type)} fontSize={15}>
                                     {tag}
                                 </Badge>
                             ),
