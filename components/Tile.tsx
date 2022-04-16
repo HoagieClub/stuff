@@ -7,7 +7,7 @@ const typeToColor = new Map([
     ['Student Sale', 'red'],
     ['Lost & Found', 'green'],
     ['Bulletin', 'purple'],
-    ['Selling', 'yellow']
+    ['Selling', 'yellow'],
 ])
 
 export default function Tile({ tile }) {
