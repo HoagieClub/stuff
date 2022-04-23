@@ -33,6 +33,7 @@ interface MailData{
     // Could be different from sender
     name: string;
     content: string;
+    date: Date;
 }
 
 export default {}

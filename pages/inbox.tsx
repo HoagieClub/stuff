@@ -14,6 +14,7 @@ export default function EmailList() {
         // Could be different from sender
         name: 'hoagieclub',
         content: 'This is content of email',
+        date: new Date(),
     }
 
     const email2 : MailData = {
@@ -30,6 +31,7 @@ export default function EmailList() {
         + ' student theater here at Princeton since 1920, and with our own theater'
         + ' and tech shop, we are here to support your directing dreams and play'
         + ' production needs!',
+        date: new Date(),
     }
 
     const allData : MailData[] = [];
