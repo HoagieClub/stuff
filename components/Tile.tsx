@@ -53,7 +53,8 @@ export default function Tile({ tile }) {
                         top: 0,
                         right: 10,
                     }}
-                    ><b>${15}
+                    >
+                        <b>${15}
                         </b>
                     </span>
 
@@ -97,6 +98,6 @@ export default function Tile({ tile }) {
                     Read More
                 </Button>
             </Pane>
-        </Pane >
+        </Pane>
     );
 }
