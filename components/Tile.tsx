@@ -47,6 +47,7 @@ export default function Tile({ tile }) {
                     alignItems="flex-start"
                 >
                     <span style={{ fontSize: '20px' }}><b>{tile.title}</b></span>
+                  
                     <span style={{
                         fontSize: '30px',
                         position: 'absolute',
@@ -64,6 +65,7 @@ export default function Tile({ tile }) {
                         width={500}
                         height={500}
                     />
+        
                     <Pane
                         paddingTop={15}
                         fontSize="15px"
