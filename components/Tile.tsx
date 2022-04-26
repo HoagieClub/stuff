@@ -1,5 +1,5 @@
 import {
-    Pane, Badge, Button, InfoSignIcon, ArrowTopRightIcon
+    Pane, Badge, Button, InfoSignIcon, ArrowTopRightIcon,
 } from 'evergreen-ui'
 import Image from 'next/image'
 
