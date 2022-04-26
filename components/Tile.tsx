@@ -1,6 +1,4 @@
-import {
-    Pane, Badge, Button, InfoSignIcon, ArrowTopRightIcon,
-} from 'evergreen-ui';
+import { Pane, Badge, Button, InfoSignIcon, ArrowTopRightIcon } from 'evergreen-ui'
 import Image from 'next/image'
 
 // Badge colors
@@ -57,14 +55,12 @@ export default function Tile({ tile }) {
                         <b>${15}
                         </b>
                     </span>
-
                     <Image
                         src={tile.thumbnail}
                         alt={tile.title}
                         width={500}
                         height={500}
                     />
-
                     <Pane
                         paddingTop={15}
                         fontSize="15px"
