@@ -1,4 +1,6 @@
-import { Pane, Badge, Button, InfoSignIcon, ArrowTopRightIcon } from 'evergreen-ui'
+import {
+    Pane, Badge, Button, InfoSignIcon, ArrowTopRightIcon
+} from 'evergreen-ui'
 import Image from 'next/image'
 
 // Badge colors
