@@ -1,6 +1,7 @@
 import {
     Pane, Badge, Button, InfoSignIcon, ArrowTopRightIcon,
-} from 'evergreen-ui';
+} from 'evergreen-ui'
+import Image from 'next/image'
 
 // Badge colors
 const typeToColor = new Map([
@@ -46,8 +47,22 @@ export default function Tile({ tile }) {
                     alignItems="flex-start"
                 >
                     <span style={{ fontSize: '20px' }}><b>{tile.title}</b></span>
-                    <span style={{ fontSize: '15px' }}><b>${tile.amt}</b></span>
-                    <img id="listingImage" src={tile.thumbnail} alt={tile.title} />
+                    <span style={{
+                        fontSize: '30px',
+                        position: 'absolute',
+                        top: 0,
+                        right: 10,
+                    }}
+                    >
+                        <b>${15}
+                        </b>
+                    </span>
+                    <Image
+                        src={tile.thumbnail}
+                        alt={tile.title}
+                        width={500}
+                        height={500}
+                    />
                     <Pane
                         paddingTop={15}
                         fontSize="15px"
