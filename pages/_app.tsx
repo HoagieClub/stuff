@@ -35,6 +35,25 @@ export default function App({ Component, pageProps }) {
                 <title>Stuff by Hoagie</title>
                 <meta property="og:image" content="https://stuff.hoagie.io/social.png" />
                 <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+                <script
+                    async
+                    // eslint-disable-next-line max-len
+                    src="https://www.googletagmanager.com/gtag/js?id=G-2XE860KE6H"
+                />
+                <script
+                    // eslint-disable-next-line react/no-danger
+                    dangerouslySetInnerHTML={{
+                        __html: `
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-2XE860KE6H', {
+              page_path: window.location.pathname,
+            });
+          `,
+                    }}
+                />
+
             </Head>
             <Content Component={Component} pageProps={pageProps} />
         </UserProvider>
