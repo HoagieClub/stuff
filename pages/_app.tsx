@@ -34,6 +34,7 @@ export default function App({ Component, pageProps }) {
             <Head>
                 <title>Stuff by Hoagie</title>
                 <meta property="og:image" content="https://stuff.hoagie.io/social.png" />
+                <link rel="icon" type="image/x-icon" href="/favicon.ico" />
             </Head>
             <Content Component={Component} pageProps={pageProps} />
         </UserProvider>
