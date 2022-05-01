@@ -1,5 +1,6 @@
 import {
     majorScale, Link, Heading, Card, Avatar, useTheme,
+    Button,
 } from 'evergreen-ui'
 
 interface CardProps {
@@ -11,7 +12,7 @@ interface CardProps {
  *  throughout different Hoagie applications.
  */
 const ProfileCard = ({ user }:CardProps) => {
-    const theme = useTheme();
+    const theme:any = useTheme();
     const username = (
         user === undefined || user.user === undefined || user.isLoading
     ) ? 'Tammy Tiger' : user.user.name;
@@ -42,6 +43,7 @@ const ProfileCard = ({ user }:CardProps) => {
             >
                 ({email})
             </Link>
+            <a href="/api/auth/logout"><Button marginTop={20}>Log Out</Button></a>
         </Card>
     )
 }

@@ -1,4 +1,4 @@
-export type PostTypes = 'sale'|'selling'|'lost'|'bulletin';
+export type PostCategories = 'sale'|'selling'|'lost'|'bulletin';
 
 // TODO: add more permissable tags
 export type TagTypes = 'tech'|'clothing'|'help'|'opportunities'|'lost'|'found';
@@ -14,7 +14,7 @@ interface PostData {
     title: string;
     description: string;
     // Type of the post, can only be PostTypes
-    type: PostTypes;
+    category: PostCategories;
     // Imgur URL to the image
     thumbnail?: string;
     // Link to the post

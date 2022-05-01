@@ -6,19 +6,21 @@ import Nav from '../lib/hoagie-ui/Nav';
 import Footer from '../components/Footer';
 import Theme from '../lib/hoagie-ui/Theme';
 import '../lib/hoagie-ui/theme.css';
+import './index.css';
 
 function Content({ Component, pageProps }) {
     const user = useUser();
     const tabs = [
-        { href: '/home', title: 'Home' },
-        { href: '/about', title: 'About' },
-        { href: '/logout', title: 'Logout' },
+        { href: '/all', title: 'All' },
+        { href: '/marketplace', title: 'Marketplace' },
+        { href: '/lostfound', title: 'Lost & Found' },
+        { href: '/bulletins', title: 'Bulletins' },
     ]
 
     return (
         <Theme palette="gray">
             <Layout>
-                <Nav name="stuff" tabs={tabs} user={user} />
+                <Nav name="stuff" tabs={tabs} user={user} beta />
                 <Component {...pageProps} />
                 <Footer />
             </Layout>

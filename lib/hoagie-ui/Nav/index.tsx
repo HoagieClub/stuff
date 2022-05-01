@@ -25,7 +25,7 @@ interface NavProps {
 const Nav = ({
     name, logoComponent, tabs = [], user, beta = false,
 }:NavProps) => {
-    const theme = useTheme();
+    const theme:any = useTheme();
     const router = useRouter();
     const username = (
         user === undefined || user.user === undefined || user.isLoading
@@ -71,7 +71,7 @@ const Nav = ({
                     paddingX={majorScale(5)}
                     fontSize={25}
                 >
-                    <Link href="/">
+                    <Link href="/all">
                         <Pane cursor="pointer" className="hoagie">
                             {logoComponent || (
                                 <Pane>hoagie
@@ -88,13 +88,13 @@ const Nav = ({
                                         ))}
                                     </b>
                                     {beta
-                                && <Text className="beta" color="blue400">beta</Text>}
+                                && <Text className="beta" color="blue800">beta</Text>}
                                 </Pane>
                             )}
                         </Pane>
                     </Link>
                     <Pane display="flex" alignItems="center">
-                        <TabNavigation>
+                        <TabNavigation className="hide-on-mobile">
                             {tabs.map((tab) => (
                                 <Link href={tab.href} passHref>
                                     <Tab

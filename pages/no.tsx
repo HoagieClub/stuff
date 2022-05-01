@@ -13,7 +13,7 @@ export default withPageAuthRequired(() => {
             queryParams.delete('state')
             // TODO: add support for other params to persist using
             // queryParam.toString() or remove the queryParams method
-            router.replace('/app', undefined, { shallow: true })
+            router.replace('/all', undefined, { shallow: true })
         }
     }, [])
 

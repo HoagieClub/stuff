@@ -3,7 +3,7 @@ import { useRouter } from 'next/router'
 import { useUser } from '@auth0/nextjs-auth0'
 import {
     Pane, majorScale, minorScale, Spinner,
-    ArrowLeftIcon, Button, WarningSignIcon,
+    ArrowLeftIcon, Button, ChevronRightIcon,
     DragHandleHorizontalIcon,
 } from 'evergreen-ui'
 import Link from 'next/link'
@@ -17,15 +17,15 @@ export default function Index() {
     else if (user) {
         Profile = (
             <Pane>
-                <Link href="/app">
+                <Link href="/all">
                     <Button
                         height={56}
                         width={majorScale(35)}
                         appearance="primary"
                         marginBottom={20}
-                        iconBefore={WarningSignIcon}
+                        iconBefore={ChevronRightIcon}
                     >
-                        Access the App
+                        See all posts
                     </Button>
                 </Link><br />
                 <AuthButton variant="logout" />
@@ -116,22 +116,6 @@ export default function Index() {
                                 </Pane>
                             </Button>
                         </Link><br />
-                        <Link href="/bulletin">
-                            <Button
-                                height={56}
-                                width={majorScale(35)}
-                                appearance="default"
-                                marginTop={20}
-                                iconBefore={ArrowLeftIcon}
-                            >
-                                <Pane display="flex" className="hoagie">
-                                    Go to
-                                    <Pane marginLeft={minorScale(1)}>
-                                        Bulletin
-                                    </Pane>
-                                </Pane>
-                            </Button>
-                        </Link>
                     </Pane>
                 </div>
             </Pane>
