@@ -33,6 +33,7 @@ export default function App({ Component, pageProps }) {
         <UserProvider>
             <Head>
                 <title>Stuff by Hoagie</title>
+                <meta property="og:image" content="https://stuff.hoagie.io/social.png" />
             </Head>
             <Content Component={Component} pageProps={pageProps} />
         </UserProvider>
