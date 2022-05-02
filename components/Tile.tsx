@@ -54,10 +54,10 @@ export default function Tile({ tile }) {
             )
         } else {
             title = (
-                <>
+                <Pane marginTop={-18} width="100%" className="limited">
                     <span className="bold">{tile.tags[0].toUpperCase()}: </span>
                     {tile.title}
-                </>
+                </Pane>
             );
         }
     }
@@ -72,12 +72,15 @@ export default function Tile({ tile }) {
                     display="flex"
                     alignItems="center"
                 >
-                    <Pane>
+                    <Pane
+                        width="100%"
+                    >
                         <Text
                             fontSize={20}
                             fontWeight={500}
                             fontFamily="Inter"
                             marginLeft={5}
+                            width="100%"
                             overflow="hidden"
                             textOverflow="ellipsis"
                             whiteSpace="nowrap"
@@ -141,7 +144,7 @@ export default function Tile({ tile }) {
 
     const tagsSection = (tagsToShow) => (
         <Pane
-            paddingTop={30}
+            paddingTop={10}
             paddingX={contentPadding}
         >
             {tagsToShow?.map(
@@ -167,7 +170,7 @@ export default function Tile({ tile }) {
                 backgroundColor="white"
                 borderRadius={10}
                 width={360}
-                height={350}
+                height={380}
                 marginTop={20}
                 paddingTop={10}
                 paddingBottom={20}
@@ -192,6 +195,13 @@ export default function Tile({ tile }) {
                 }
                 {/* Image or Description section */}
                 { descriptionSection }
+                <Pane
+                    paddingTop={30}
+                    paddingX={contentPadding}
+                >
+                    <span style={{ fontWeight: 600 }}>From: </span>
+                    {tile.user?.email === '' ? tile.email : tile.user.email}
+                </Pane>
                 { tagsSection(tags) }
                 <Pane
                     position="absolute"
@@ -234,7 +244,7 @@ export default function Tile({ tile }) {
                             iconBefore={InfoSignIcon}
                             onClick={() => setShowModal(true)}
                         >
-                            Learn More
+                            Details
                         </Button>
                     </Pane>
                 </Pane>
@@ -255,7 +265,6 @@ export default function Tile({ tile }) {
                             paddingX={contentPadding}
                             fontSize="18px"
                             lineHeight="24px"
-                            marginBottom={-20}
                         >
                             {tile.description}
                         </Pane>
