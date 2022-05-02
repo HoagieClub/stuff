@@ -33,7 +33,9 @@ export default function PostPage({ pageNumber, category = '' }) {
                     paddingTop={30}
                 >
                     <Spinner />
-                    <Text>Loading posts...</Text>
+                    <Text>Loading posts... Taking too long?
+                        <b><a href="/api/auth/logout"> Click here to Relogin</a></b>
+                    </Text>
                 </Pane>
             </View>
         )
