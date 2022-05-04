@@ -47,9 +47,9 @@ export default function ExistingDigest({
                     <br />
                     <Text><b>Category:</b> { category }</Text>
                     <br />
-                    <Text><b>Tags:</b> { tags.join(', ') }</Text>
+                    <Text><b>Tags:</b> { tags?.join(', ') }</Text>
                     <br />
-                    <Text><b>Contact:</b>  { user.email } </Text>
+                    <Text><b>Contact:</b>  { user?.email } </Text>
                     <br />
                     <br />
                     <Text><b>Description:</b>  </Text>
