@@ -2,7 +2,7 @@ import { useEffect } from 'react'
 import { useRouter } from 'next/router'
 import { useUser } from '@auth0/nextjs-auth0'
 import {
-    Pane, majorScale, minorScale, Spinner,
+    Pane, majorScale, minorScale, Spinner, Heading,
     ArrowLeftIcon, Button, ChevronRightIcon,
     DragHandleHorizontalIcon,
 } from 'evergreen-ui'
@@ -71,7 +71,6 @@ export default function Index() {
                     width="100%"
                     display="flex"
                     justifyContent="center"
-                    marginBottom={-30}
                 >
                     <Pane
                         width={200}
@@ -90,7 +89,9 @@ export default function Index() {
                         />
                     </Pane>
                 </Pane>
-                <h1 className="hoagie">All the <b>stuff</b> in one place.</h1>
+                <Heading size={900} className="hoagie">
+                    All the <b>stuff</b> in one place.
+                </Heading>
                 <p>From sales to lost & found and beyond.</p>
                 <div>
                     <Pane

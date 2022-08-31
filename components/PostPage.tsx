@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router'
 import {
     Pane, Spinner, Pagination, Text, Button,
-    AddRowTopIcon, TabNavigation, Tab, majorScale, Paragraph,
+    AddRowTopIcon, TabNavigation, Tab, majorScale, Paragraph, Heading,
 } from 'evergreen-ui'
 // import Filter from '../components/Filter';
 import useSWR from 'swr';
@@ -43,7 +43,7 @@ export default function PostPage({ pageNumber, category = '' }) {
                     flexDirection="column"
                     paddingTop={32}
                 >
-                    <Spinner />
+                    <Spinner marginBottom={8} />
                     <Text>Loading posts... Taking too long?
                         <b><a href="/api/auth/logout"> Click here to Relogin</a></b>
                     </Text>
@@ -73,8 +73,11 @@ export default function PostPage({ pageNumber, category = '' }) {
                     paddingTop={32}
                     paddingBottom={32}
                 >
-                    <Paragraph size={400}>:( looks like there aren't any posts yet
+                    <Heading is="h5" size={800} marginBottom={8}>(._.)</Heading>
+                    <Paragraph size={400}>
+                        It looks like there aren&apos;t any posts right now...
                     </Paragraph>
+
                 </Pane>
             </View>
         )
@@ -98,7 +101,7 @@ export default function PostPage({ pageNumber, category = '' }) {
         )
     }
     return (
-    <View>
+        <View>
             <Pane
                 paddingTop={majorScale(4)}
                 display="flex"
@@ -165,6 +168,6 @@ export default function PostPage({ pageNumber, category = '' }) {
                     onPreviousPage={() => { router.push(`/all/${pageNumber - 1}`) }}
                 />
             </Pane>
-    </View>
+        </View>
     );
 }

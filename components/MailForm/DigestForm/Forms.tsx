@@ -68,7 +68,6 @@ function LostAndFoundForm({
                 </Pane>
             )}
             <FormField
-                marginTop={24}
                 label="Lost or Found?"
                 description="Did you lose or find an item?."
                 required
@@ -197,7 +196,6 @@ function SaleForm({
                             const selectedCat = Object.entries(newCategories).filter(
                                 (c:[string, boolean]) => c[1],
                             ).flatMap((c:[string, boolean]) => c[0].toLowerCase())
-                            console.log(selectedCat)
                             setTags(selectedCat)
                         }}
                     />
