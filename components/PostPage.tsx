@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router'
 import {
     Pane, Spinner, Pagination, Text, Button,
-    AddRowTopIcon, TabNavigation, Tab,
+    AddRowTopIcon, TabNavigation, Tab, majorScale, Paragraph,
 } from 'evergreen-ui'
 // import Filter from '../components/Filter';
 import useSWR from 'swr';
@@ -17,20 +17,31 @@ export default function PostPage({ pageNumber, category = '' }) {
     const fetcher = (url: string) => fetch(url).then((r) => r.json())
     const query = `/api/hoagie/stuff?limit=${perPage}&offset=${
         (pageNumber - 1) * perPage}${category !== '' ? `&category=${category}` : ''}`
-    const { data, error } = useSWR(
+    const { data, isValidating, error } = useSWR(
         query,
         fetcher,
     )
 
-    if (!data || error) {
+    if (isValidating) {
         return (
             <View>
+                <Link href="/create?type=bulletin">
+                    <Button
+                        iconBefore={AddRowTopIcon}
+                        height={42}
+                        marginTop={20}
+                        intent="success"
+                        appearance="primary"
+                    >
+                        Create a post
+                    </Button>
+                </Link>
                 <Pane
                     display="flex"
                     justifyContent="center"
                     alignItems="center"
                     flexDirection="column"
-                    paddingTop={30}
+                    paddingTop={32}
                 >
                     <Spinner />
                     <Text>Loading posts... Taking too long?
@@ -40,10 +51,56 @@ export default function PostPage({ pageNumber, category = '' }) {
             </View>
         )
     }
+    if (!data) {
+        return (
+            <View>
+                <Link href="/create?type=bulletin">
+                    <Button
+                        iconBefore={AddRowTopIcon}
+                        height={42}
+                        marginTop={20}
+                        intent="success"
+                        appearance="primary"
+                    >
+                        Create a post
+                    </Button>
+                </Link>
+                <Pane
+                    display="flex"
+                    justifyContent="center"
+                    alignItems="center"
+                    flexDirection="column"
+                    paddingTop={32}
+                    paddingBottom={32}
+                >
+                    <Paragraph size={400}>:( looks like there aren't any posts yet
+                    </Paragraph>
+                </Pane>
+            </View>
+        )
+    }
+    if (error) {
+        return (
+            <View>
+                <Pane
+                    display="flex"
+                    justifyContent="center"
+                    alignItems="center"
+                    flexDirection="column"
+                    paddingTop={32}
+                >
+                    <Spinner />
+                    <Text>Looks like there was an error in loading posts...
+                        <b><a href="/api/auth/logout"> Click here to Relogin</a></b>
+                    </Text>
+                </Pane>
+            </View>
+        )
+    }
     return (
-        <View>
+    <View>
             <Pane
-                paddingTop={30}
+                paddingTop={majorScale(4)}
                 display="flex"
                 justifyItems="center"
                 className="only-mobile"
@@ -108,6 +165,6 @@ export default function PostPage({ pageNumber, category = '' }) {
                     onPreviousPage={() => { router.push(`/all/${pageNumber - 1}`) }}
                 />
             </Pane>
-        </View>
+    </View>
     );
 }
