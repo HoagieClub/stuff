@@ -1,6 +1,5 @@
 import {
-    majorScale, Link, Heading, Card, Avatar, useTheme,
-    Button,
+    majorScale, Button, Link, Heading, Card, Avatar, useTheme,
 } from 'evergreen-ui'
 
 interface CardProps {
@@ -8,17 +7,17 @@ interface CardProps {
     user: any;
 }
 
+const defName = 'Tammy Tiger';
+const defEmail = 'hoagie@princeton.edu';
+
 /** ProfileCard is a profile card meant for display of user information
  *  throughout different Hoagie applications.
  */
-const ProfileCard = ({ user }:CardProps) => {
-    const theme:any = useTheme();
-    const username = (
-        user === undefined || user.user === undefined || user.isLoading
-    ) ? 'Tammy Tiger' : user.user.name;
-    const email = (
-        user === undefined || user.user === undefined || user.isLoading
-    ) ? 'hoagie@princeton.edu' : user.user.email;
+function ProfileCard({ user }:CardProps) {
+    const theme = useTheme();
+
+    const name = user?.isLoading ? defName : (user?.user?.name ?? defName);
+    const email = user?.isLoading ? defEmail : (user?.user?.email ?? defEmail);
 
     return (
         <Card
@@ -31,9 +30,9 @@ const ProfileCard = ({ user }:CardProps) => {
             flexDirection="column"
             alignItems="center"
         >
-            <Avatar name={username} color={theme.title} size={40} />
-            <Heading size={500} marginTop={majorScale(1)} textAlign="center">
-                {username}
+            <Avatar name={name} color={theme.title} size={40} />
+            <Heading size={500} marginTop={majorScale(1)}>
+                {name}
             </Heading>
             <Link
                 href={`mailto:${email}`}
@@ -43,7 +42,7 @@ const ProfileCard = ({ user }:CardProps) => {
             >
                 ({email})
             </Link>
-            <a href="/api/auth/logout"><Button marginTop={20}>Log Out</Button></a>
+            <a href="/api/auth/logout"><Button marginTop={16}>Log Out</Button></a>
         </Card>
     )
 }

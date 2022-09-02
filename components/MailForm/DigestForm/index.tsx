@@ -51,7 +51,8 @@ export default function DigestForm({
         <Pane>
             <Heading
                 size={800}
-                marginY={majorScale(2)}
+                marginTop={majorScale(4)}
+                marginBottom={majorScale(2)}
             >Create a Post
             </Heading>
             <ErrorMessage text={errorMessage} />
@@ -181,8 +182,9 @@ export default function DigestForm({
                     alignItems="center"
                 >
                     <InfoSignIcon marginRight={10} />
-                    You are about to add your message
-                    to the weekly Hoagie Mail Digest service.
+                    <Text>You are about to add your message
+                        to the weekly Hoagie Digest service.
+                    </Text>
                 </Pane>
                 <Text>
                     Once you click <b>Submit</b>, Hoagie will append your

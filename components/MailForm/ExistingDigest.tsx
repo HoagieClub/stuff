@@ -23,7 +23,8 @@ export default function ExistingDigest({
         <Pane>
             <Heading
                 size={800}
-                marginY={majorScale(2)}
+                marginTop={majorScale(4)}
+                marginBottom={majorScale(2)}
             >Your Current Stuff Post:
             </Heading>
             <ErrorMessage text={errorMessage} />
@@ -37,6 +38,7 @@ export default function ExistingDigest({
             </Text>
             <Pane
                 marginTop={20}
+                background="gray50"
                 display="flex"
                 alignItems="center"
                 justifyContent="center"
@@ -103,8 +105,9 @@ export default function ExistingDigest({
                     alignItems="center"
                 >
                     <InfoSignIcon marginRight={10} />
-                    Are you sure you want to delete your current
-                    Hoagie Digest message?
+                    <Text>Are you sure you want to delete your current
+                        Hoagie Digest message?
+                    </Text>
                 </Pane>
                 <Text>
                     This action <b>cannot be undone</b>.

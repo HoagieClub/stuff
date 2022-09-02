@@ -11,12 +11,12 @@ const user = {
         email: "hoagie@princeton.edu",
         name: "Tammy Tiger",
         nickname: "hoagie"
-    }
+    },
 };
 <Nav name="test" user={user} />
 ```
 
-Nav with Tabs + WIP Disclaimer
+Nav with Tabs + Beta Disclaimer
 ```js
 const tabs = [
     { title: 'Buy', href: '/buy' },

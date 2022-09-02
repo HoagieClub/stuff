@@ -7,53 +7,35 @@ import { useRouter } from 'next/router'
 import ProfileCard from '../ProfileCard'
 
 interface NavProps {
-    /** name of app for hoagie[name] title */
+    /** name of app for hoagie{name} title */
     name: string;
     /** custom component in place of hoagie logo */
-    logoComponent?: ComponentType;
+    LogoComponent?: ComponentType;
+    /** custom component in place of header color strip */
+    HeaderComponent?: ComponentType;
     /** list of tab objects for navbar, with title and href fields */
     tabs?: Array<any>;
     /** authenticated user data */
     user?: any;
-    /** show 'beta' WIP disclaimer on app title  */
+    /** show 'beta' development disclaimer on hoagie app logo  */
     beta?: boolean;
 }
 
 /** Nav is a navbar meant for internal navigations throughout
  *  different Hoagie applications.
  */
-const Nav = ({
-    name, logoComponent, tabs = [], user, beta = false,
-}:NavProps) => {
-    const theme:any = useTheme();
+function Nav({
+    name, LogoComponent, HeaderComponent, tabs = [], user, beta = false,
+}:NavProps) {
+    const theme = useTheme();
     const router = useRouter();
-    const username = (
-        user === undefined || user.user === undefined || user.isLoading
-    ) ? 'Tammy Tiger' : user.user.name;
-
-    const rainbow = [
-        'red300',
-        'yellow300',
-        'green300',
-        'teal300',
-        'rblue300',
-    ]
+    const uName = user?.isLoading ? 'Tammy Tiger' : (user?.user?.name ?? 'Tammy Tiger');
 
     return (
         <Pane elevation={1}>
-            <Pane
-                width="100%"
-                height={20}
-                background="blue400"
-                display="flex"
-                flexDirection="row"
-            >
-                {
-                    rainbow.map((color) => (
-                        <Pane width="20%" height={20} background={color} />
-                    ))
-                }
-            </Pane>
+            {HeaderComponent
+                ? <HeaderComponent />
+                : <Pane width="100%" height={20} background="blue500" />}
             <Pane
                 display="flex"
                 justifyContent="center"
@@ -71,46 +53,58 @@ const Nav = ({
                     paddingX={majorScale(5)}
                     fontSize={25}
                 >
-                    <Link href="/all">
-                        <Pane cursor="pointer" className="hoagie">
-                            {logoComponent || (
-                                <Pane>hoagie
-                                    <b>
-                                        {name.split('').map((l, i) => (
+                    <Link href="/">
+                        <Pane cursor="pointer" position="relative">
+                            {LogoComponent
+                                ? <LogoComponent />
+                                : (
+                                    <Pane whiteSpace="nowrap">
+                                        <Text
+                                            is="h2"
+                                            display="inline-block"
+                                            className="hoagie logo"
+                                            color="grey900"
+                                        >
+                                            hoagie
+                                        </Text>
+                                        <Text
+                                            is="h2"
+                                            display="inline-block"
+                                            className="hoagie logo"
+                                            color="blue500"
+                                        >{name}
+                                        </Text>
+                                        {beta
+                                        && (
                                             <Text
-                                                fontSize={24}
-                                                fontWeight="bold"
-                                                fontFamily="Nunito"
-                                                color={rainbow[i]}
+                                                className="hoagie beta"
+                                                position="absolute"
+                                                color="grey900"
                                             >
-                                                {l}
+                                                (BETA)
                                             </Text>
-                                        ))}
-                                    </b>
-                                    {beta
-                                && <Text className="beta" color="blue800">beta</Text>}
-                                </Pane>
-                            )}
+                                        )}
+                                    </Pane>
+                                )}
                         </Pane>
                     </Link>
                     <Pane display="flex" alignItems="center">
-                        <TabNavigation className="hide-on-mobile">
+                        <TabNavigation>
                             {tabs.map((tab) => (
                                 <Link href={tab.href} passHref>
                                     <Tab
                                         key={tab.title}
                                         is="a"
                                         id={tab.title}
-                                        isSelected={
-                                            router ? router.pathname === tab.href : false
-                                        }
+                                        isSelected={router?.pathname === tab.href}
+                                        appearance="navbar"
                                     >
                                         {tab.title}
                                     </Tab>
                                 </Link>
                             ))}
                         </TabNavigation>
-                        {(user !== undefined && user.user !== undefined) && (
+                        {user?.user && (
                             <Popover
                                 content={
                                     <ProfileCard user={user} />
@@ -118,7 +112,7 @@ const Nav = ({
                                 position={Position.BOTTOM}
                             >
                                 <Avatar
-                                    name={username}
+                                    name={uName}
                                     style={{ cursor: 'pointer' }}
                                     color={theme.title}
                                     size={40}
