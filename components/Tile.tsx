@@ -24,10 +24,12 @@ export default function Tile({ tile }) {
     const [showModal, setShowModal] = useState(false)
     // Buttons
     let b1text = 'Contact';
+    // const link = tile.link ? tile.link : `mailto:${tile.email}`;
+    const link = tile.category == 'lost' || tile.category == 'found' ? `mailto:${tile.email}` : tile.link;
     if (tile.category === 'sale' && tile.link) {
         b1text = 'Open Slides';
     }
-    const b1Icon = tile.link ? ArrowTopRightIcon : EnvelopeIcon;
+    const b1Icon = tile.category == 'lost' || tile.category == 'found' ? EnvelopeIcon : ArrowTopRightIcon;
 
     // Make sure descrpition does not overflow
     let description = tile.description.length > 300
@@ -38,7 +40,7 @@ export default function Tile({ tile }) {
 
     let title = <span className="bold">{tile.title}</span>;
 
-    const link = tile.link ? tile.link : `mailto:${tile.email}`;
+
 
     if (tile.category === 'lost') {
         if (!tile.thumbnail) {
@@ -177,24 +179,24 @@ export default function Tile({ tile }) {
                 position="relative"
             >
                 {/* Category */}
-                { categorySection }
+                {categorySection}
                 {/* Price information */}
                 {
                     tile.info?.price
-                && (
-                    <span style={{
-                        fontSize: '25px',
-                        position: 'absolute',
-                        top: 20,
-                        right: 40,
-                    }}
-                    >
-                        ${tile.info.price}
-                    </span>
-                )
+                    && (
+                        <span style={{
+                            fontSize: '25px',
+                            position: 'absolute',
+                            top: 20,
+                            right: 40,
+                        }}
+                        >
+                            ${tile.info.price}
+                        </span>
+                    )
                 }
                 {/* Image or Description section */}
-                { descriptionSection }
+                {descriptionSection}
                 <Pane
                     paddingTop={30}
                     paddingX={contentPadding}
@@ -202,7 +204,7 @@ export default function Tile({ tile }) {
                     <span style={{ fontWeight: 600 }}>From: </span>
                     {tile.user?.email === '' ? tile.email : tile.user.email}
                 </Pane>
-                { tagsSection(tags) }
+                {tagsSection(tags)}
                 <Pane
                     position="absolute"
                     width="100%"
@@ -256,8 +258,8 @@ export default function Tile({ tile }) {
                 confirmLabel={b1text}
                 onConfirm={() => { window.open(link) }}
             >
-                { categorySection }
-                { thumbnail }
+                {categorySection}
+                {thumbnail}
                 {
                     tile.description && (
                         <Pane
@@ -270,7 +272,7 @@ export default function Tile({ tile }) {
                         </Pane>
                     )
                 }
-                { tagsSection(tile.tags) }
+                {tagsSection(tile.tags)}
                 <Pane
                     paddingTop={15}
                     paddingX={contentPadding}
