@@ -25,11 +25,11 @@ export default function Tile({ tile }) {
     // Buttons
     let b1text = 'Contact';
     // const link = tile.link ? tile.link : `mailto:${tile.email}`;
-    const link = tile.category == 'lost' || tile.category == 'found' ? `mailto:${tile.email}` : tile.link;
+    const link = tile.category === 'lost' || tile.category === 'found' ? `mailto:${tile.email}` : tile.link;
     if (tile.category === 'sale' && tile.link) {
         b1text = 'Open Slides';
     }
-    const b1Icon = tile.category == 'lost' || tile.category == 'found' ? EnvelopeIcon : ArrowTopRightIcon;
+    const b1Icon = tile.category === 'lost' || tile.category === 'found' ? EnvelopeIcon : ArrowTopRightIcon;
 
     // Make sure descrpition does not overflow
     let description = tile.description.length > 300
