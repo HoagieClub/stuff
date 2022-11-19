@@ -23,15 +23,17 @@ const categoryToName = new Map<string, any>([
 export default function Tile({ tile }) {
     const [showModal, setShowModal] = useState(false)
     // Buttons
-    let b1text = 'Contact';
-    // const link = tile.link ? tile.link : `mailto:${tile.email}`;
-    const link = tile.category === 'lost' || tile.category === 'found'
-        ? `mailto:${tile.email}` : tile.link;
-    if (tile.category === 'sale' && tile.link) {
-        b1text = 'Open Slides';
-    }
-    const b1Icon = tile.category === 'lost' || tile.category === 'found'
-        ? EnvelopeIcon : ArrowTopRightIcon;
+    /*  let b1text = 'Contact';
+     // const link = tile.link ? tile.link : `mailto:${tile.email}`;
+     if (tile.category === 'sale' && tile.link) {
+         b1text = 'Open Slides';
+     } */
+    const b1text = tile.category === 'sale' && tile.link
+        ? 'Open Slides' : 'Contact';
+    const b1Icon = tile.category === 'sale' && tile.link
+        ? ArrowTopRightIcon : EnvelopeIcon;
+    const link = tile.category === 'sale' && tile.link
+        ? tile.link : `mailto:${tile.email}`;
 
     // Make sure descrpition does not overflow
     let description = tile.description.length > 300
