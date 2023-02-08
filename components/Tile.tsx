@@ -30,8 +30,8 @@ export default function Tile({ tile }) {
     const b1Icon = tile.link ? ArrowTopRightIcon : EnvelopeIcon;
 
     // Make sure descrpition does not overflow
-    let description = tile.description.length > 265
-        ? `${tile.description.substring(0, 265)}`
+    let description = tile.description.length > 220
+        ? tile.description.substring(0, 210)
         : tile.description;
 
     const tags = tile.tags?.length > 2 ? tile.tags.slice(0, 2) : tile.tags;
@@ -41,9 +41,10 @@ export default function Tile({ tile }) {
     const link = tile.link ? tile.link : `mailto:${tile.email}`;
 
     if (tile.category === 'lost') {
+        const length = tile.title.length + tile.description.length;
         if (!tile.thumbnail) {
-            description = tile.description.length > 150
-                ? `${tile.description.substring(0, 150)}...`
+            description = length > 180
+                ? `${tile.description.substring(0, 170 - tile.title.length)}...`
                 : tile.description;
             description = (
                 <>
@@ -122,6 +123,9 @@ export default function Tile({ tile }) {
     const descriptionSection = (
         <Pane
             height={180}
+            style={{
+                overflow: 'hidden',
+            }}
         >
             {
                 thumbnail
@@ -139,19 +143,19 @@ export default function Tile({ tile }) {
                         }}
                     >
                         {description}
-                        {tile.description.length > 265 && (
+                        {tile.description.length > 220 && (
                             <Text
                                 fontSize="18px"
                                 lineHeight="24px"
                             >
-                                ...(
+                                (
                                 <Text
                                     onClick={() => { setShowModal(true) }}
                                     aria-hidden
                                     fontSize="18px"
                                     lineHeight="24px"
+                                    color={categoryToColor.get(tile.category)}
                                     style={{
-                                        color: 'blue',
                                         cursor: 'pointer',
                                     }}
                                 >

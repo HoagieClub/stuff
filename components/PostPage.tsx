@@ -163,9 +163,9 @@ export default function PostPage({ pageNumber, category = '' }) {
                 <Pagination
                     totalPages={data.length === perPage ? pageNumber + 1 : pageNumber}
                     page={pageNumber}
-                    onPageChange={(page) => { router.push(`/all/${page}`) }}
-                    onNextPage={() => { router.push(`/all/${pageNumber + 1}`) }}
-                    onPreviousPage={() => { router.push(`/all/${pageNumber - 1}`) }}
+                    onPageChange={(page) => { router.push(`/${category == '' ? 'all' : category}/${page}`) }}
+                    onNextPage={() => { router.push(`/${category == '' ? 'all' : category}/${pageNumber + 1}`) }}
+                    onPreviousPage={() => { router.push(`/${category == '' ? 'all' : category}/${pageNumber - 1}`) }}
                 />
             </Pane>
         </View>
