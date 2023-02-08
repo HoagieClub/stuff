@@ -30,8 +30,8 @@ export default function Tile({ tile }) {
     const b1Icon = tile.link ? ArrowTopRightIcon : EnvelopeIcon;
 
     // Make sure descrpition does not overflow
-    let description = tile.description.length > 300
-        ? `${tile.description.substring(0, 300)}...`
+    let description = tile.description.length > 265
+        ? `${tile.description.substring(0, 265)}`
         : tile.description;
 
     const tags = tile.tags?.length > 2 ? tile.tags.slice(0, 2) : tile.tags;
@@ -134,8 +134,32 @@ export default function Tile({ tile }) {
                         paddingX={contentPadding}
                         fontSize="18px"
                         lineHeight="24px"
+                        style={{
+                            overflowWrap: 'break-word',
+                        }}
                     >
                         {description}
+                        {tile.description.length > 265 && (
+                            <Text
+                                fontSize="18px"
+                                lineHeight="24px"
+                            >
+                                ...(
+                                <Text
+                                    onClick={() => { setShowModal(true) }}
+                                    aria-hidden
+                                    fontSize="18px"
+                                    lineHeight="24px"
+                                    style={{
+                                        color: 'blue',
+                                        cursor: 'pointer',
+                                    }}
+                                >
+                                    more
+                                </Text>
+                                )
+                            </Text>
+                        )}
                     </Pane>
                 )
             }
