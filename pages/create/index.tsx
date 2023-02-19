@@ -1,13 +1,13 @@
 import { useState, useEffect } from 'react';
-import { withPageAuthRequired } from '@auth0/nextjs-auth0';
 import router from 'next/router';
 import { Spinner } from 'evergreen-ui';
 import useSWR, { useSWRConfig } from 'swr';
 import MailForm from '../../components/MailForm';
 import ErrorMessage from '../../components/ErrorMessage';
 import View from '../../components/View';
+import { withMockablePageAuthRequired } from '../../mock/User';
 
-export default withPageAuthRequired(() => {
+export default withMockablePageAuthRequired(() => {
     const { mutate } = useSWRConfig()
     const [errorMessage, setErrorMessage] = useState('')
     const [success, setSuccess] = useState(false)

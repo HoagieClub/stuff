@@ -1,8 +1,7 @@
-import { withPageAuthRequired } from '@auth0/nextjs-auth0';
 import PostPage from '../../components/PostPage';
-// import { PostData } from '../types';
+import { withMockablePageAuthRequired } from '../../mock/User';
 
-export default withPageAuthRequired(() => (
+export default withMockablePageAuthRequired(() => (
     <PostPage
         pageNumber={1}
         category="bulletin"

@@ -1,6 +1,5 @@
 import React from 'react';
 import Head from 'next/head';
-import { UserProvider, useUser } from '@auth0/nextjs-auth0';
 import { Pane, Text, Paragraph } from 'evergreen-ui';
 import Layout from '../lib/hoagie-ui/Layout';
 import Nav from '../lib/hoagie-ui/Nav';
@@ -8,6 +7,7 @@ import Footer from '../lib/hoagie-ui/Footer';
 import Theme from '../lib/hoagie-ui/Theme';
 import '../lib/hoagie-ui/theme.css';
 import './stuff.css';
+import { MockableUserProvider, useMockableUser } from '../mock/User';
 
 const RainbowLogo = () => (
     <Pane whiteSpace="nowrap">
@@ -76,7 +76,7 @@ function Content({ Component, pageProps }) {
         { href: '/lostfound', title: 'Lost & Found' },
         { href: '/bulletins', title: 'Bulletins' },
     ]
-    const user = useUser();
+    const user = useMockableUser();
 
     return (
         <Theme palette="gray">
@@ -98,7 +98,7 @@ function Content({ Component, pageProps }) {
 
 export default function App({ Component, pageProps }) {
     return (
-        <UserProvider>
+        <MockableUserProvider>
             <Head>
                 <title>Stuff by Hoagie</title>
                 <meta property="og:image" content="https://stuff.hoagie.io/social.png" />
@@ -124,6 +124,6 @@ export default function App({ Component, pageProps }) {
 
             </Head>
             <Content Component={Component} pageProps={pageProps} />
-        </UserProvider>
+        </MockableUserProvider>
     );
 }

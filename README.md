@@ -21,7 +21,6 @@ We use VSCode for development. Please install the following packages:
 
 ESLint is particularly important, if everything is installed correctly, it will allow you to see style errors inside the editor which we use to make sure our code is tidy and consistent throughout the codebase (same as output from `yarn lint`).
 ## Contribution
-[Follow this guide](https://github.com/HoagieClub/help/wiki/Working-on-repositories) to setup a fork of this repository along with the upstream. 
 **Always create new branches when adding new features.** For example, let's say I am adding a delete button. I would do:
 ```
 # Switch to new branch called delete-button
@@ -30,13 +29,8 @@ git checkout -b delete-button
 
 When the main branch get updated, you want to run the following:
 ```
-# Fetch upstream master and merge with your repo's main branch
-git fetch upstream
-git checkout main
-git merge upstream/main
-
 # If there were any new commits, rebase your development branch, for example delete-button
 git checkout delete-button
-git rebase main
+git pull --rebase main
 ```
 You may have to deal with merge conflicts; this will be visible and easier to deal with in VSCode. Here's a [short video about how to do it](https://www.youtube.com/watch?v=QmKdodJU-js).

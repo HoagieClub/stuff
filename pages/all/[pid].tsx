@@ -1,9 +1,9 @@
-import { withPageAuthRequired } from '@auth0/nextjs-auth0';
 import { useRouter } from 'next/router'
 import PostPage from '../../components/PostPage';
 import View from '../../components/View';
+import { withMockablePageAuthRequired } from '../../mock/User';
 
-export default withPageAuthRequired(() => {
+export default withMockablePageAuthRequired(() => {
     const router = useRouter()
     const { pid } = router.query
     if (pid === undefined || typeof pid !== 'string') {
