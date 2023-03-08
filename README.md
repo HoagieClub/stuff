@@ -1,4 +1,6 @@
 # HoagieStuff
+![Showcase of Hoagie Stuff](https://stuff.hoagie.io/showcase.gif)
+
 Everything on campus, from bulletin to sales, in one place. 
 
 ## Setup
