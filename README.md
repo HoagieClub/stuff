@@ -4,7 +4,7 @@
 Everything on campus, from bulletin to sales, in one place. 
 
 ## Setup
-NOTE: You will need a `.env.local` file from a Hoagie Project coordinator to run most of the features. Place it in your main directory. You will also need Node.js, NPM, and Yarn, there are plenty of tutorials online on how to install these.
+NOTE: You will need to rename `.env.local.txt` to `.env.local` to run it locally. Place it in your main directory. You will also need Node.js, NPM, and Yarn, there are plenty of tutorials online on how to install these.
 Assuming you have those tools and files, do the following to install dependencies:
 ```
 yarn
