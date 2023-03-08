@@ -23,10 +23,9 @@ export default function DigestForm({
     const [name, setName] = useState('')
     const [link, setLink] = useState('')
     const [thumbnail, setThumbnail] = useState('')
-    // eslint-disable-next-line no-restricted-globals
-    const queryParams = new URLSearchParams(location.search)
-    const category = queryParams.has('type')
-        ? (queryParams.get('type') || '') : 'bulletin';
+    const queryParams = router.query
+    const category = typeof queryParams.type === 'string'
+        ? (queryParams.type ?? '') : 'bulletin';
 
     const categoryDefaults = {
         sale: [],

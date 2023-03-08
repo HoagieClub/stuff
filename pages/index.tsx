@@ -1,16 +1,16 @@
 import { useEffect } from 'react'
 import { useRouter } from 'next/router'
-import { useUser } from '@auth0/nextjs-auth0'
 import {
     Pane, majorScale, minorScale, Spinner, Heading,
     ArrowLeftIcon, Button, ChevronRightIcon,
     DragHandleHorizontalIcon,
 } from 'evergreen-ui'
 import Link from 'next/link'
+import { useMockableUser } from '../mock/User'
 import AuthButton from '../lib/hoagie-ui/AuthButton'
 
 export default function Index() {
-    const { user, error, isLoading } = useUser();
+    const { user, error, isLoading } = useMockableUser();
     let Profile;
     if (isLoading) Profile = <Spinner />;
     else if (error) Profile = <div>{error.message}</div>;

@@ -1,10 +1,8 @@
 /* eslint-disable max-len */
-import { withPageAuthRequired } from '@auth0/nextjs-auth0';
 import {
     Heading, Pane, Avatar,
 } from 'evergreen-ui';
 import View from '../components/View';
-// import { PostData } from '../types';
 
 const core = [
     {
@@ -80,7 +78,7 @@ const MemberSection = ({ members }) => (
     </Pane>
 )
 
-export default withPageAuthRequired(() => (
+export default () => (
     <View>
         <Pane
             paddingX={20}
@@ -109,4 +107,4 @@ export default withPageAuthRequired(() => (
             <b><a href="https://club.hoagie.io" target="_blank" rel="noopener noreferrer"> club.hoagie.io</a></b>.
         </Pane>
     </View>
-));
+);
