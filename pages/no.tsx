@@ -1,9 +1,9 @@
 import { useEffect } from 'react';
 import { majorScale, Pane } from 'evergreen-ui';
 import router from 'next/router';
-import { withMockablePageAuthRequired } from '../mock/User';
+import { withPageAuthRequired } from '@auth0/nextjs-auth0';
 
-export default withMockablePageAuthRequired(() => {
+export default withPageAuthRequired(() => {
     useEffect(() => {
         // eslint-disable-next-line no-restricted-globals
         const queryParams = new URLSearchParams(location.search)

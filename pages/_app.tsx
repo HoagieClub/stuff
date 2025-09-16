@@ -7,7 +7,12 @@ import Footer from '../lib/hoagie-ui/Footer';
 import Theme from '../lib/hoagie-ui/Theme';
 import '../lib/hoagie-ui/theme.css';
 import './stuff.css';
-import { MockableUserProvider, useMockableUser } from '../mock/User';
+import { UserProvider, useUser } from '@auth0/nextjs-auth0';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+    title: 'Stuff by Hoagie'
+}
 
 const RainbowLogo = () => (
     <Pane whiteSpace="nowrap">
@@ -76,7 +81,7 @@ function Content({ Component, pageProps }) {
         { href: '/lostfound', title: 'Lost & Found' },
         { href: '/bulletins', title: 'Bulletins' },
     ]
-    const user = useMockableUser();
+    const { user } = useUser();
 
     return (
         <Theme palette="gray">
@@ -98,32 +103,8 @@ function Content({ Component, pageProps }) {
 
 export default function App({ Component, pageProps }) {
     return (
-        <MockableUserProvider>
-            <Head>
-                <title>Stuff by Hoagie</title>
-                <meta property="og:image" content="https://stuff.hoagie.io/social.png" />
-                <link rel="icon" type="image/x-icon" href="/favicon.ico" />
-                <script
-                    async
-                    // eslint-disable-next-line max-len
-                    src="https://www.googletagmanager.com/gtag/js?id=G-2XE860KE6H"
-                />
-                <script
-                    // eslint-disable-next-line react/no-danger
-                    dangerouslySetInnerHTML={{
-                        __html: `
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', 'G-2XE860KE6H', {
-              page_path: window.location.pathname,
-            });
-          `,
-                    }}
-                />
-
-            </Head>
+        <UserProvider>
             <Content Component={Component} pageProps={pageProps} />
-        </MockableUserProvider>
+        </UserProvider>
     );
 }

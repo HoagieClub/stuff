@@ -1,8 +1,8 @@
 import { getAccessToken } from '@auth0/nextjs-auth0';
 import { RequestInit } from 'next/dist/server/web/spec-extension/request';
-import { withMockableApiAuthRequired } from '../../../mock/User';
+import { withApiAuthRequired } from '@auth0/nextjs-auth0';
 
-export default withMockableApiAuthRequired(async (req, res) => {
+export default withApiAuthRequired(async (req, res) => {
     let { path } = req.query
 
     if (typeof path === 'string') {

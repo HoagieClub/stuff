@@ -1,9 +1,9 @@
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import PostPage from '../../components/PostPage';
-import { withMockablePageAuthRequired } from '../../mock/User';
+import { withPageAuthRequired } from '@auth0/nextjs-auth0';
 
-export default withMockablePageAuthRequired(() => {
+export default withPageAuthRequired(() => {
     const router = useRouter()
     useEffect(() => {
         // eslint-disable-next-line no-restricted-globals

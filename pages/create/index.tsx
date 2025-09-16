@@ -5,9 +5,9 @@ import useSWR, { useSWRConfig } from 'swr';
 import MailForm from '../../components/MailForm';
 import ErrorMessage from '../../components/ErrorMessage';
 import View from '../../components/View';
-import { withMockablePageAuthRequired } from '../../mock/User';
+import { withPageAuthRequired } from '@auth0/nextjs-auth0';
 
-export default withMockablePageAuthRequired(() => {
+export default withPageAuthRequired(() => {
     const { mutate } = useSWRConfig()
     const [errorMessage, setErrorMessage] = useState('')
     const [success, setSuccess] = useState(false)
