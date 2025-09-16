@@ -1,5 +1,4 @@
 import React from 'react';
-import Head from 'next/head';
 import { Pane, Text, Paragraph } from 'evergreen-ui';
 import Layout from '../lib/hoagie-ui/Layout';
 import Nav from '../lib/hoagie-ui/Nav';
@@ -7,8 +6,9 @@ import Footer from '../lib/hoagie-ui/Footer';
 import Theme from '../lib/hoagie-ui/Theme';
 import '../lib/hoagie-ui/theme.css';
 import './stuff.css';
-import { UserProvider, useUser } from '@auth0/nextjs-auth0';
+import { UserProvider, useUser } from '@auth0/nextjs-auth0/client';
 import { Metadata } from 'next';
+import { ReactNode } from 'react';
 
 export const metadata: Metadata = {
     title: 'Stuff by Hoagie'
@@ -74,7 +74,7 @@ const RainbowHeader = () => (
     </Pane>
 )
 
-function Content({ Component, pageProps }) {
+async function Content({ children }: { children: ReactNode }): Promise<JSX.Element> {
     const tabs = [
         { href: '/all', title: 'All' },
         { href: '/marketplace', title: 'Marketplace' },
@@ -94,17 +94,21 @@ function Content({ Component, pageProps }) {
                     HeaderComponent={RainbowHeader}
                     beta
                 />
-                <Component {...pageProps} />
+                {children}
                 <Footer href="/contributors" />
             </Layout>
         </Theme>
     );
 }
 
-export default function App({ Component, pageProps }) {
+export default function App({ children }: { children: ReactNode }) {
     return (
-        <UserProvider>
-            <Content Component={Component} pageProps={pageProps} />
-        </UserProvider>
+        <html lang='en'>
+            <UserProvider>
+                <body>
+                    <Content>{children}</Content>
+                </body>
+            </UserProvider>
+        </html>
     );
 }

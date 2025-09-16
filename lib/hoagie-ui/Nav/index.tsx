@@ -1,11 +1,19 @@
 'use client';
 
 import {
-    majorScale, Pane, Text, Position, Popover, Avatar, TabNavigation, Tab, useTheme,
+    majorScale, 
+    Pane, 
+    Text, 
+    Position, 
+    Popover, 
+    Avatar, 
+    TabNavigation, 
+    Tab, 
+    useTheme,
 } from 'evergreen-ui'
 import { ComponentType } from 'react'
 import Link from 'next/link'
-import { usePathname } from 'next/navigation'
+import { useRouter, usePathname } from 'next/navigation'
 import ProfileCard from '../ProfileCard'
 
 interface NavProps {
@@ -30,14 +38,13 @@ function Nav({
     name, LogoComponent, HeaderComponent, tabs = [], user, beta = false,
 }:NavProps) {
     const theme = useTheme();
+    const router = useRouter();
     const pathname = usePathname();
-    const uName = user?.isLoading ? 'Tammy Tiger' : (user?.user?.name ?? 'Tammy Tiger');
-
+    const username = user?.name;
     return (
         <Pane elevation={1}>
-            {HeaderComponent
-                ? <HeaderComponent />
-                : <Pane width="100%" height={20} background="blue500" />}
+            {HeaderComponent? <HeaderComponent />
+                : <Pane width="100%" height={20} background={theme.colors.blue500} />}
             <Pane
                 display="flex"
                 justifyContent="center"
@@ -57,15 +64,14 @@ function Nav({
                 >
                     <Link href="/">
                         <Pane cursor="pointer" position="relative">
-                            {LogoComponent
-                                ? <LogoComponent />
+                            {LogoComponent? <LogoComponent />
                                 : (
                                     <Pane whiteSpace="nowrap">
                                         <Text
                                             is="h2"
                                             display="inline-block"
                                             className="hoagie logo"
-                                            color="grey900"
+                                            color={theme.colors.gray900}
                                         >
                                             hoagie
                                         </Text>
@@ -73,15 +79,14 @@ function Nav({
                                             is="h2"
                                             display="inline-block"
                                             className="hoagie logo"
-                                            color="blue500"
+                                            color={theme.colors.blue500}
                                         >{name}
                                         </Text>
-                                        {beta
-                                        && (
+                                        {beta && (
                                             <Text
                                                 className="hoagie beta"
                                                 position="absolute"
-                                                color="grey900"
+                                                color={theme.colors.gray900}
                                             >
                                                 (BETA)
                                             </Text>
@@ -99,7 +104,8 @@ function Nav({
                                         is="a"
                                         id={tab.title}
                                         isSelected={pathname === tab.href}
-                                        appearance="navbar"
+                                        appearance="primary"
+                                        onSelect={() => router.push(tab.href)}
                                     >
                                         {tab.title}
                                     </Tab>
@@ -108,15 +114,16 @@ function Nav({
                         </TabNavigation>
                         {user?.user && (
                             <Popover
-                                content={
-                                    <ProfileCard user={user} />
-                                }
+                                content={<ProfileCard user={user} />}
                                 position={Position.BOTTOM}
                             >
                                 <Avatar
-                                    name={uName}
-                                    style={{ cursor: 'pointer' }}
-                                    color={theme.title}
+                                    name={username}
+                                    style={{ 
+                                        cursor: 'pointer', 
+                                        border: `2px solid ${theme.colors.blueTint}`,
+                                    }}
+                                    backgroundColor={theme.colors.blue100}
                                     size={40}
                                     marginLeft={majorScale(4)}
                                 />
