@@ -1,3 +1,5 @@
+'use client';
+
 import { Pane, majorScale, useTheme } from 'evergreen-ui'
 
 interface FooterProps {
