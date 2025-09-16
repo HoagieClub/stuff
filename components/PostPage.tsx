@@ -1,4 +1,4 @@
-import { useRouter } from 'next/router'
+import { useRouter, usePathname } from 'next/navigation'
 import {
     Pane, Spinner, Pagination, Text, Button,
     AddRowTopIcon, TabNavigation, Tab, majorScale, Paragraph, Heading,
@@ -12,7 +12,8 @@ import View from './View';
 // import { PostData } from '../types';
 
 export default function PostPage({ pageNumber, category = '' }) {
-    const router = useRouter()
+    const router = useRouter();
+    const pathname = usePathname();
     const perPage = 6;
     const fetcher = (url: string) => fetch(url).then((r) => r.json())
     const query = `/api/hoagie/stuff?limit=${perPage}&offset=${
@@ -122,7 +123,7 @@ export default function PostPage({ pageNumber, category = '' }) {
                                 key={tab[0]}
                                 is="a"
                                 id={tab[0]}
-                                isSelected={router ? router.pathname === tab[1] : false}
+                                isSelected={router ? pathname === tab[1] : false}
                             >
                                 {tab[0]}
                             </Tab>

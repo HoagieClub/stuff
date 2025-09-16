@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import router from 'next/router';
+import { useRouter } from 'next/navigation';
 import { Spinner } from 'evergreen-ui';
 import useSWR, { useSWRConfig } from 'swr';
 import MailForm from '../../components/MailForm';
@@ -8,6 +8,7 @@ import View from '../../components/View';
 import { withPageAuthRequired } from '@auth0/nextjs-auth0';
 
 export default withPageAuthRequired(() => {
+    const router = useRouter()
     const { mutate } = useSWRConfig()
     const [errorMessage, setErrorMessage] = useState('')
     const [success, setSuccess] = useState(false)
@@ -62,7 +63,7 @@ export default withPageAuthRequired(() => {
             queryParams.delete('state')
             // TODO: add support for other params to persist using
             // queryParam.toString() or remove the queryParams method
-            router.replace('/all', undefined, { shallow: true })
+            router.replace('/all')
         }
     }, [])
 

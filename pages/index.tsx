@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { useRouter } from 'next/router'
+import { useRouter } from 'next/navigation'
 import {
     Pane, majorScale, minorScale, Spinner, Heading,
     ArrowLeftIcon, Button, ChevronRightIcon,
@@ -43,7 +43,7 @@ export default function Index() {
             queryParams.delete('state')
             // TODO: add support for other params to persist using
             // queryParam.toString() or remove the queryParams method
-            router.replace('/', undefined, { shallow: true })
+            router.replace('/')
         }
     }, [])
     return (

@@ -1,9 +1,10 @@
 import { useEffect } from 'react';
 import { majorScale, Pane } from 'evergreen-ui';
-import router from 'next/router';
+import { useRouter} from 'next/navigation';
 import { withPageAuthRequired } from '@auth0/nextjs-auth0';
 
 export default withPageAuthRequired(() => {
+    const router = useRouter()
     useEffect(() => {
         // eslint-disable-next-line no-restricted-globals
         const queryParams = new URLSearchParams(location.search)
@@ -13,7 +14,7 @@ export default withPageAuthRequired(() => {
             queryParams.delete('state')
             // TODO: add support for other params to persist using
             // queryParam.toString() or remove the queryParams method
-            router.replace('/all', undefined, { shallow: true })
+            router.replace('/all')
         }
     }, [])
 

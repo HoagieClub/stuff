@@ -1,4 +1,4 @@
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
 import PostPage from '../../components/PostPage';
 import { withPageAuthRequired } from '@auth0/nextjs-auth0';
@@ -14,7 +14,7 @@ export default withPageAuthRequired(() => {
             queryParams.delete('state')
             // TODO: add support for other params to persist using
             // queryParam.toString() or remove the queryParams method
-            router.replace('/all', undefined, { shallow: true })
+            router.replace('/all')
         }
     }, [])
     return <PostPage pageNumber={1} />

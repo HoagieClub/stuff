@@ -3,7 +3,7 @@ import {
     majorScale, Dialog, InfoSignIcon, Spinner,
 } from 'evergreen-ui';
 import Link from 'next/link';
-import { useRouter } from 'next/router'
+import { useRouter, useSearchParams } from 'next/navigation'
 import { useState } from 'react';
 import SuccessPage from '../SuccessPage';
 import ExistingDigest from '../ExistingDigest';
@@ -23,9 +23,8 @@ export default function DigestForm({
     const [name, setName] = useState('')
     const [link, setLink] = useState('')
     const [thumbnail, setThumbnail] = useState('')
-    const queryParams = router.query
-    const category = typeof queryParams.type === 'string'
-        ? (queryParams.type ?? '') : 'bulletin';
+    const queryParams = useSearchParams()
+    const category = queryParams.get('type') ?? 'bulletin'
 
     const categoryDefaults = {
         sale: [],
