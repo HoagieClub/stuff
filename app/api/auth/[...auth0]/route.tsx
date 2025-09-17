@@ -14,27 +14,11 @@
  * and/or sell copies of the software. This software is provided "as-is", without warranty of any kind.
  */
 
-import { handleAuth, handleLogin } from '@auth0/nextjs-auth0';
+import { handleAuth } from '@auth0/nextjs-auth0';
 
 /**
  * Handles authentication requests.
  *
  * @returns A NextResponse object with the API response.
  */
-export const GET = handleAuth({
-    async login(req, res) {
-        try {
-            // Pass custom parameters to login
-            return await handleLogin(req, res, {
-                authorizationParams: {
-                    audience: 'https://hoagieauth', // or AUTH0_AUDIENCE
-                    // Add the `offline_access` scope to also get a Refresh Token
-                    connection: 'Princeton-CAS',
-                },
-                returnTo: '/app',
-            });
-        } catch (error: any) {
-            res.status(error.status || 400).end(error.message);
-        }
-    },
-});
+export const GET = handleAuth();
