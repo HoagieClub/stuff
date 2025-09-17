@@ -1,9 +1,9 @@
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
 import PostPage from '../../components/PostPage';
-import { withPageAuthRequired } from '@auth0/nextjs-auth0';
+import { withPageAuthRequired } from '@auth0/nextjs-auth0/client';
 
-export default withPageAuthRequired(async () => {
+export default withPageAuthRequired(() => {
     const router = useRouter()
     useEffect(() => {
         // eslint-disable-next-line no-restricted-globals
