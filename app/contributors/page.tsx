@@ -2,7 +2,7 @@
 import {
     Heading, Pane, Avatar,
 } from 'evergreen-ui';
-import View from '../components/View';
+import View from '../../components/View';
 
 const core = [
     {
