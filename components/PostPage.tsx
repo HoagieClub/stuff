@@ -3,13 +3,10 @@ import {
     Pane, Spinner, Pagination, Text, Button,
     AddRowTopIcon, TabNavigation, Tab, majorScale, Paragraph, Heading,
 } from 'evergreen-ui'
-// import Filter from '../components/Filter';
 import useSWR from 'swr';
 import Link from 'next/link';
-import Tile from './Tile';
-// import SearchBar from '../components/SearchBar';
-import View from './View';
-// import { PostData } from '../types';
+import Tile from '@/components/Tile';
+import View from '@/components/View';
 
 export default function PostPage({ pageNumber, category = '' }) {
     const router = useRouter();

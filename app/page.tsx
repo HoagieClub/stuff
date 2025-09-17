@@ -9,7 +9,7 @@ import {
 } from 'evergreen-ui'
 import Link from 'next/link'
 import { useUser } from '@auth0/nextjs-auth0/client';
-import AuthButton from '../lib/hoagie-ui/AuthButton'
+import AuthButton from '@/lib/hoagie-ui/AuthButton'
 
 export default function Index() {
     const { user, error, isLoading } = useUser();

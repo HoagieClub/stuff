@@ -29,7 +29,7 @@ import {
 import Link from 'next/link';
 import { useRouter, usePathname } from 'next/navigation';
 
-import ProfileCard from '../ProfileCard';
+import ProfileCard from '@/lib/hoagie-ui/ProfileCard';
 
 export type Nav = {
     // The name of the app for generating the `hoagie{name}` title.

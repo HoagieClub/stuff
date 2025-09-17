@@ -1,6 +1,6 @@
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
-import PostPage from '../../components/PostPage';
+import PostPage from '@/components/PostPage';
 import { withPageAuthRequired } from '@auth0/nextjs-auth0/client';
 
 export default withPageAuthRequired(() => {

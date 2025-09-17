@@ -2,7 +2,7 @@ import { useState } from 'react';
 import {
     Pane, Button, Checkbox, Text,
 } from 'evergreen-ui';
-import { PostData, TagTypes } from '../types';
+import { PostData, TagTypes } from '@/types';
 
 function objMap(obj:any, func:any) {
     return Object.fromEntries(Object.entries(obj).map(([k, v]) => [k, func(k, v)]));

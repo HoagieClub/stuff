@@ -1,8 +1,8 @@
 import React from 'react';
-import '../lib/hoagie-ui/theme.css';
-import './stuff.css';
-import Content from '../app/Content';
-import { UserProvider, useUser } from '@auth0/nextjs-auth0/client';
+import '@/lib/hoagie-ui/theme.css';
+import '@/app/stuff.css';
+import Content from '@/app/Content';
+import { UserProvider } from '@auth0/nextjs-auth0/client';
 import { Metadata } from 'next';
 import { ReactNode } from 'react';
 
