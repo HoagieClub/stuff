@@ -1,8 +1,9 @@
+'use client';
+
 import React from 'react';
 import { Pane, Text, Paragraph } from 'evergreen-ui';
 import Layout from '../lib/hoagie-ui/Layout';
 import Nav from '../lib/hoagie-ui/Nav';
-import Footer from '../lib/hoagie-ui/Footer';
 import Theme from '../lib/hoagie-ui/Theme';
 import '../lib/hoagie-ui/theme.css';
 import './stuff.css';
@@ -95,7 +96,6 @@ export default function Content({ children }: { children: ReactNode }): JSX.Elem
                     beta
                 />
                 {children}
-                <Footer href="/contributors" />
             </Layout>
         </Theme>
     );
