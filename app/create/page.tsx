@@ -7,7 +7,7 @@ import ErrorMessage from '../../components/ErrorMessage';
 import View from '../../components/View';
 import { withPageAuthRequired } from '@auth0/nextjs-auth0';
 
-export default withPageAuthRequired(() => {
+export default withPageAuthRequired(async () => {
     const router = useRouter()
     const { mutate } = useSWRConfig()
     const [errorMessage, setErrorMessage] = useState('')
