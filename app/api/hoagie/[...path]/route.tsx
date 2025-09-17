@@ -10,6 +10,7 @@ type Params = { path: string[] };
 const handler = withApiAuthRequired(
     async (request: NextRequest, { params }: { params: Params }) => {
         const path = params.path.join('/');
+        const queryString = request.nextUrl.searchParams.toString();
 
         const fetchReq: RequestInit = {
             method: request.method,
@@ -33,7 +34,7 @@ const handler = withApiAuthRequired(
         }
 
         return await proxyRequest(
-            `${process.env.HOAGIE_API_URL}${path}`,
+            `${process.env.HOAGIE_API_URL}${path}?${queryString}`,
             fetchReq
         );
     }
