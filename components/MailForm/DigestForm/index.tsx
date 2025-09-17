@@ -1,13 +1,16 @@
+import { useState } from 'react';
+
 import {
     Button, Pane, Heading, Text, Alert,
     majorScale, Dialog, InfoSignIcon, Spinner,
 } from 'evergreen-ui';
 import Link from 'next/link';
 import { useRouter, useSearchParams } from 'next/navigation'
-import { useState } from 'react';
-import SuccessPage from '@/components/MailForm/SuccessPage';
-import ExistingDigest from '@/components/MailForm/ExistingDigest';
+
 import ErrorMessage from '@/components/ErrorMessage';
+import ExistingDigest from '@/components/MailForm/ExistingDigest';
+import SuccessPage from '@/components/MailForm/SuccessPage';
+
 import { GenericForm, LostAndFoundForm, SaleForm } from './Forms';
 
 export default function DigestForm({

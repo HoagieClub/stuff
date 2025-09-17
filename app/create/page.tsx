@@ -1,11 +1,14 @@
 import { useState, useEffect } from 'react';
-import { useRouter } from 'next/navigation';
-import { Spinner } from 'evergreen-ui';
-import useSWR, { useSWRConfig } from 'swr';
-import MailForm from '@/components/MailForm';
-import ErrorMessage from '@/components/ErrorMessage';
-import View from '@/components/View';
+
 import { withPageAuthRequired } from '@auth0/nextjs-auth0/client';
+import { Spinner } from 'evergreen-ui';
+import { useRouter } from 'next/navigation';
+import useSWR, { useSWRConfig } from 'swr';
+
+import ErrorMessage from '@/components/ErrorMessage';
+import MailForm from '@/components/MailForm';
+import View from '@/components/View';
+
 
 export default withPageAuthRequired(() => {
     const router = useRouter()
@@ -55,7 +58,7 @@ export default withPageAuthRequired(() => {
     }
 
     useEffect(() => {
-        // eslint-disable-next-line no-restricted-globals
+         
         const queryParams = new URLSearchParams(location.search)
 
         if (queryParams.has('code')) {
@@ -65,7 +68,7 @@ export default withPageAuthRequired(() => {
             // queryParam.toString() or remove the queryParams method
             router.replace('/all')
         }
-    }, [])
+    }, [router])
 
     // TODO: Handle error properly.
     if (!data) {

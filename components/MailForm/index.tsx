@@ -1,9 +1,10 @@
+import { useUser } from '@auth0/nextjs-auth0/client';
 import {
     Spinner, Pane,
 } from 'evergreen-ui'
+
 import DigestForm from '@/components/MailForm/DigestForm';
 import View from '@/components/View';
-import { useUser } from '@auth0/nextjs-auth0/client';
 
 export default function MailForm({
     onSend, errorMessage, success,

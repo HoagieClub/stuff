@@ -1,10 +1,11 @@
-import { useRouter, usePathname } from 'next/navigation'
 import {
     Pane, Spinner, Pagination, Text, Button,
     AddRowTopIcon, TabNavigation, Tab, majorScale, Paragraph, Heading,
 } from 'evergreen-ui'
-import useSWR from 'swr';
 import Link from 'next/link';
+import { useRouter, usePathname } from 'next/navigation'
+import useSWR from 'swr';
+
 import Tile from '@/components/Tile';
 import View from '@/components/View';
 
@@ -114,6 +115,7 @@ export default function PostPage({ pageNumber, category = '' }) {
                         ['Bulletins', '/bulletins'],
                     ].map((tab) => (
                         <Link
+                            key={tab[0]}
                             href={tab[1]}
                         >
                             <Tab
@@ -149,7 +151,7 @@ export default function PostPage({ pageNumber, category = '' }) {
                         width="100%"
                         className="grid"
                     >
-                        { data && data.map((tile) => <Tile tile={tile} />) }
+                        { data && data.map((tile, index) => <Tile key={index} tile={tile} />) }
                     </Pane>
                 </Pane>
             </Pane>

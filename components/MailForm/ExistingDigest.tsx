@@ -1,8 +1,10 @@
+import { useState } from 'react';
+
 import {
     Button, Pane, Heading, Text, Alert, majorScale, Dialog, InfoSignIcon,
 } from 'evergreen-ui';
 import Link from 'next/link';
-import { useState } from 'react';
+
 import ErrorMessage from '@/components/ErrorMessage';
 
 export default function ExistingDigest({
@@ -56,7 +58,7 @@ export default function ExistingDigest({
                     <br />
                     <Text><b>Description:</b>  </Text>
                     <br />
-                    {/* eslint-disable-next-line max-len */}
+                    { }
                     <Text>{ description }</Text>
                 </Pane>
             </Pane>

@@ -1,3 +1,5 @@
+import { useState, useEffect } from 'react';
+
 import {
     Pane, TextInputField,
     TextareaField, Image,
@@ -5,7 +7,7 @@ import {
     Checkbox,
     RadioGroup,
 } from 'evergreen-ui';
-import { useState, useEffect } from 'react';
+
 import ErrorMessage from '@/components/ErrorMessage';
 
 function LostAndFoundForm({
@@ -39,7 +41,7 @@ function LostAndFoundForm({
         if (imageRequest.success) {
             setThumbnail(imageRequest.data.link)
         } else {
-            // eslint-disable-next-line max-len
+             
             setError('Error occured with your image upload. Please ensure your file is correct.')
         }
     }
@@ -49,7 +51,7 @@ function LostAndFoundForm({
         if (filled) setNameInvalid(name === '');
         if (desc === '') setFilledDesc(true);
         if (filledDesc) setDescInvalid(desc === '');
-    }, [name, desc]);
+    }, [name, desc, filled, filledDesc]);
     return (
         <Pane>
             <ErrorMessage text={errorText} />
@@ -147,7 +149,7 @@ function SaleForm({
     useEffect(() => {
         if (desc === '') setFilledDesc(true);
         if (filledDesc) setDescInvalid(desc === '');
-    }, [desc]);
+    }, [desc, filledDesc]);
 
     return (
         <Pane>
@@ -181,6 +183,7 @@ function SaleForm({
             {
                 salesCategories.map((category) => (
                     <Checkbox
+                        key={category}
                         label={category}
                         checked={categories[category]}
                         onChange={(e) => {
@@ -227,7 +230,7 @@ function GenericForm({
         if (filled) setNameInvalid(name === '');
         if (desc === '') setFilledDesc(true);
         if (filledDesc) setDescInvalid(desc === '');
-    }, [name, desc]);
+    }, [name, desc, filled, filledDesc]);
     return (
         <Pane>
             <TextInputField

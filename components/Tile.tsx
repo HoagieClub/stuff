@@ -1,9 +1,10 @@
+import { useState } from 'react'
+
 import {
     Pane, Badge, Button, InfoSignIcon, ArrowTopRightIcon,
     Text, EnvelopeIcon, Dialog, Heading,
 } from 'evergreen-ui'
 import Image from 'next/image'
-import { useState } from 'react'
 
 // Badge colors
 const categoryToColor = new Map<string, any>([
@@ -176,8 +177,9 @@ export default function Tile({ tile }) {
             paddingX={contentPadding}
         >
             {tagsToShow?.map(
-                (tag: string) => (
+                (tag: string, index) => (
                     <Badge
+                        key={index}
                         color={categoryToColor.get(tile.category)}
                         paddingY={10}
                         paddingX={10}

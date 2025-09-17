@@ -1,7 +1,8 @@
-/* eslint-disable max-len */
+ 
 import {
     Heading, Pane, Avatar,
 } from 'evergreen-ui';
+
 import View from '@/components/View';
 
 const core = [
@@ -21,14 +22,14 @@ const core = [
         firstName: 'Ananya',
         lastName: 'Grover',
         title: 'Software Developer Member',
-        // eslint-disable-next-line max-len
+         
         image: 'https://storage.googleapis.com/tally-response-assets/r0pMer/620070f2-96b9-4857-a414-9477560451b7',
     },
     {
         firstName: 'Edmund',
         lastName: 'Young',
         title: 'Software Developer Member',
-        // eslint-disable-next-line max-len
+         
         image: 'https://storage.googleapis.com/tally-response-assets/r0pMer/41032d4b-6671-419c-babf-7f382b516d81',
     },
     {
@@ -73,12 +74,13 @@ const MemberSection = ({ members }) => (
         flexWrap="wrap"
     >
         {
-            members.map((member) => <MemberCard member={member} />)
+            members.map((member, index) => <MemberCard key={index} member={member} />)
         }
     </Pane>
 )
 
-export default () => (
+export default function Contributors(){ 
+    return (
     <View>
         <Pane
             paddingX={20}
@@ -107,4 +109,4 @@ export default () => (
             <b><a href="https://club.hoagie.io" target="_blank" rel="noopener noreferrer"> club.hoagie.io</a></b>.
         </Pane>
     </View>
-);
+)};

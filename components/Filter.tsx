@@ -1,14 +1,14 @@
-import { useState } from 'react';
 import {
     Pane, Button, Checkbox, Text,
 } from 'evergreen-ui';
+
 import { PostData, TagTypes } from '@/types';
 
-function objMap(obj:any, func:any) {
-    return Object.fromEntries(Object.entries(obj).map(([k, v]) => [k, func(k, v)]));
-}
+// function objMap(obj:any, func:any) {
+//     return Object.fromEntries(Object.entries(obj).map(([k, v]) => [k, func(k, v)]));
+// }
 
-// eslint-disable-next-line no-unused-vars
+ 
 type FilterPair = [{ label: TagTypes, checked: boolean}, (e:any) => void];
 
 interface FilterObject {
@@ -17,18 +17,19 @@ interface FilterObject {
 
 export default function Filter({ data, onFilter }) {
     // Pre-set categories
-    const labels = {
-        Type: ['Marketplace', 'Bulletin', 'Lost & Found'],
-        Bulletin: ['Opportunity', 'Help'],
-        Marketplace: ['Clothing', 'Electronics', 'School', 'Furniture', 'Accessories'],
-        'Lost & Found': ['Lost', 'Found'],
-    }
+    // const labels = {
+    //     Type: ['Marketplace', 'Bulletin', 'Lost & Found'],
+    //     Bulletin: ['Opportunity', 'Help'],
+    //     Marketplace: ['Clothing', 'Electronics', 'School', 'Furniture', 'Accessories'],
+    //     'Lost & Found': ['Lost', 'Found'],
+    // }
 
-    const filters:FilterObject = objMap(
-        labels, (_, v) => v.map((label:string) => useState({
-            checked: false, label: label.toLowerCase(),
-        })),
-    )
+    // const filters:FilterObject = objMap(
+    //     labels, (_, v) => v.map((label:string) => useState({
+    //         checked: false, label: label.toLowerCase(),
+    //     })),
+    // )
+    const filters:FilterObject = {};
 
     // Filter function; find data which matches currently highlighted checkboxes
     const filter = () => {
@@ -68,6 +69,7 @@ export default function Filter({ data, onFilter }) {
             <Text fontSize={20}><b>{ title }</b></Text>
             {f.map(([item, setItem]) => (
                 <Checkbox
+                    key={item.label}
                     label={item.label}
                     checked={item.checked}
                     onChange={(e) => setItem({

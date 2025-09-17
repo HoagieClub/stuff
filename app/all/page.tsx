@@ -1,12 +1,15 @@
-import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
-import PostPage from '@/components/PostPage';
+
 import { withPageAuthRequired } from '@auth0/nextjs-auth0/client';
+import { useRouter } from 'next/navigation';
+
+import PostPage from '@/components/PostPage';
+
 
 export default withPageAuthRequired(() => {
     const router = useRouter()
     useEffect(() => {
-        // eslint-disable-next-line no-restricted-globals
+         
         const queryParams = new URLSearchParams(location.search)
 
         if (queryParams.has('code')) {
@@ -16,6 +19,6 @@ export default withPageAuthRequired(() => {
             // queryParam.toString() or remove the queryParams method
             router.replace('/all')
         }
-    }, [])
+    }, [router])
     return <PostPage pageNumber={1} />
 });

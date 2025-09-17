@@ -1,15 +1,17 @@
 'use client';
 
-import React from 'react';
+import React, { ReactNode } from 'react';
+
+import { useUser } from '@auth0/nextjs-auth0/client';
 import { Pane, Text, Paragraph } from 'evergreen-ui';
+import { Metadata } from 'next';
+
 import Layout from '@/lib/hoagie-ui/Layout';
 import Nav from '@/lib/hoagie-ui/Nav';
 import Theme from '@/lib/hoagie-ui/Theme';
+
 import '@/lib/hoagie-ui/theme.css';
 import '@/app/stuff.css';
-import { useUser } from '@auth0/nextjs-auth0/client';
-import { Metadata } from 'next';
-import { ReactNode } from 'react';
 
 export const metadata: Metadata = {
     title: 'Stuff by Hoagie'
