@@ -1,7 +1,13 @@
-export type PostCategories = 'sale'|'selling'|'lost'|'bulletin';
+export type PostCategories = 'sale' | 'selling' | 'lost' | 'bulletin';
 
 // TODO: add more permissable tags
-export type TagTypes = 'tech'|'clothing'|'help'|'opportunities'|'lost'|'found';
+export type TagTypes =
+    | 'tech'
+    | 'clothing'
+    | 'help'
+    | 'opportunities'
+    | 'lost'
+    | 'found';
 
 interface UserData {
     email: string;
@@ -24,5 +30,5 @@ interface PostData {
     user: UserData;
 }
 
-export default {}
-export type { PostData, UserData }
+export default {};
+export type { PostData, UserData };

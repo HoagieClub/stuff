@@ -1,12 +1,12 @@
 body {
-  background: #E9DDFE;
+    background: #e9ddfe;
 }
 
 .grid {
     /* Grid Fallback */
     display: flex;
     flex-wrap: wrap;
-    
+
     /* Supports Grid */
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
@@ -42,22 +42,23 @@ body {
             hsl(175deg 54% 54%) 66%,
             hsl(188deg 100% 44%) 73%,
             hsl(199deg 97% 56%) 81%,
-            hsl(225deg 100% 76%) 100%);
+            hsl(225deg 100% 76%) 100%
+        );
         background-clip: text;
         color: transparent !important;
     }
 }
 
 @media screen and (max-width: 720px) {
-  .hide-on-mobile {
-    display: none !important;
-  }
-  .only-mobile {
-    display: block;
-  }
+    .hide-on-mobile {
+        display: none !important;
+    }
+    .only-mobile {
+        display: block;
+    }
 }
 @media screen and (min-width: 720px) {
-  .only-mobile {
-    display: none !important;
-  }
+    .only-mobile {
+        display: none !important;
+    }
 }

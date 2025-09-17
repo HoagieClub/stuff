@@ -1,6 +1,6 @@
 /**
  * @overview Simple styling component to ensure the layout is consistent.
- * 
+ *
  * Copyright © 2021-2024 Hoagie Club and affiliates.
  *
  * This source code is licensed under the MIT license found in the
@@ -18,18 +18,14 @@ import { majorScale, Pane } from 'evergreen-ui';
 export default function View({ children }: { children: ReactNode }) {
     return (
         <Pane
-            width="100%"
-            height="100%"
-            display="flex"
-            alignItems="center"
-            justifyContent="center"
+            width='100%'
+            height='100%'
+            display='flex'
+            alignItems='center'
+            justifyContent='center'
         >
-            <Pane
-                width="100%"
-                maxWidth="1200px"
-                paddingX={majorScale(5)}
-            >
-                { children }
+            <Pane width='100%' maxWidth='1200px' paddingX={majorScale(5)}>
+                {children}
             </Pane>
         </Pane>
     );

@@ -8,8 +8,8 @@ import { Metadata } from 'next';
 import Content from '@/app/Content';
 
 export const metadata: Metadata = {
-    title: 'Stuff by Hoagie'
-}
+    title: 'Stuff by Hoagie',
+};
 
 export default function App({ children }: { children: ReactNode }) {
     return (

@@ -14,43 +14,39 @@ import '@/lib/hoagie-ui/theme.css';
 import '@/app/stuff.css';
 
 export const metadata: Metadata = {
-    title: 'Stuff by Hoagie'
-}
+    title: 'Stuff by Hoagie',
+};
 
 const RainbowLogo = () => (
-    <Pane whiteSpace="nowrap">
+    <Pane whiteSpace='nowrap'>
         <Text
-            is="h2"
-            display="inline-block"
-            className="hoagie logo"
-            color="grey900"
+            is='h2'
+            display='inline-block'
+            className='hoagie logo'
+            color='grey900'
         >
             hoagie
         </Text>
         <Paragraph
-            is="h2"
-            display="inline-block"
-            color="blue500"
-            className="hoagie logo rainbow-text"
+            is='h2'
+            display='inline-block'
+            color='blue500'
+            className='hoagie logo rainbow-text'
         >
             stuff
         </Paragraph>
-        <Text
-            className="hoagie beta"
-            position="absolute"
-            color="grey900"
-        >
+        <Text className='hoagie beta' position='absolute' color='grey900'>
             (BETA)
         </Text>
     </Pane>
-)
+);
 
 const RainbowHeader = () => (
     <Pane
-        width="100%"
+        width='100%'
         height={20}
-        display="flex"
-        flexDirection="row"
+        display='flex'
+        flexDirection='row'
         style={{
             backgroundImage: `linear-gradient(
                 90deg,
@@ -75,22 +71,26 @@ const RainbowHeader = () => (
             <Pane width="20%" height={20} background="teal300" />
             <Pane width="20%" height={20} background="rblue300" /> */}
     </Pane>
-)
+);
 
-export default function Content({ children }: { children: ReactNode }): JSX.Element {
+export default function Content({
+    children,
+}: {
+    children: ReactNode;
+}): JSX.Element {
     const tabs = [
         { href: '/all', title: 'All' },
         { href: '/marketplace', title: 'Marketplace' },
         { href: '/lostfound', title: 'Lost & Found' },
         { href: '/bulletins', title: 'Bulletins' },
-    ]
+    ];
     const user = useUser();
 
     return (
-        <Theme palette="gray">
+        <Theme palette='gray'>
             <Layout>
                 <Nav
-                    name="stuff"
+                    name='stuff'
                     tabs={tabs}
                     user={user?.user}
                     LogoComponent={RainbowLogo}
