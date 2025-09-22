@@ -11,6 +11,9 @@
         "lint:fix": "eslint --fix .",
         "prettier": "prettier --check ."
     },
+    "engines": {
+        "node": ">=18.x.x <=22.x.x"
+    },
     "dependencies": {
         "@auth0/nextjs-auth0": "^3.5.0",
         "evergreen-ui": "^7.1.9",
