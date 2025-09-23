@@ -5,11 +5,11 @@ import {
 } from 'next/dist/server/web/spec-extension/request';
 import { NextResponse } from 'next/server';
 
-type Params = { path: string[] };
-
 const handler = withApiAuthRequired(
-    async (request: NextRequest, { params }: { params: Params }) => {
-        const path = params.path.join('/');
+    async (request: NextRequest, ctx) => {
+
+        // Not very good, fix this later
+        const path = (ctx?.params?.path as string[]).join('/');
         const queryString = request.nextUrl.searchParams.toString();
 
         const fetchReq: RequestInit = {
