@@ -9,10 +9,11 @@
         "start": "next start -p $PORT",
         "lint": "eslint .",
         "lint:fix": "eslint --fix .",
-        "prettier": "prettier --check ."
+        "prettier": "prettier --check .",
+        "prettier:fix": "prettier --write ."
     },
     "engines": {
-        "node": ">=18.x.x <=22.x.x"
+        "node": "18.x.x - 22.x.x"
     },
     "dependencies": {
         "@auth0/nextjs-auth0": "^3.5.0",
