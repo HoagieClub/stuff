@@ -7,14 +7,11 @@ import {
     Text,
     Button,
     AddRowTopIcon,
-    TabNavigation,
-    Tab,
-    majorScale,
     Paragraph,
     Heading,
 } from 'evergreen-ui';
 import Link from 'next/link';
-import { useRouter, usePathname } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import useSWR from 'swr';
 
 import Tile from '@/components/Tile';
@@ -22,7 +19,6 @@ import View from '@/components/View';
 
 export default function PostPage({ pageNumber, category = '' }) {
     const router = useRouter();
-    const pathname = usePathname();
     const perPage = 6;
     const fetcher = (url: string) => fetch(url).then((r) => r.json());
     const query = `/api/hoagie/stuff?limit=${perPage}&offset=${
@@ -123,34 +119,6 @@ export default function PostPage({ pageNumber, category = '' }) {
     }
     return (
         <View>
-            <Pane
-                paddingTop={majorScale(4)}
-                display='flex'
-                justifyItems='center'
-                className='only-mobile'
-            >
-                <TabNavigation>
-                    {[
-                        ['All', '/all'],
-                        ['Marketplace', '/marketplace'],
-                        ['Lost & Found', '/lostfound'],
-                        ['Bulletins', '/bulletins'],
-                    ].map((tab) => (
-                        <Link key={tab[0]} href={tab[1]}>
-                            <Tab
-                                key={tab[0]}
-                                is='a'
-                                id={tab[0]}
-                                isSelected={
-                                    router ? pathname === tab[1] : false
-                                }
-                            >
-                                {tab[0]}
-                            </Tab>
-                        </Link>
-                    ))}
-                </TabNavigation>
-            </Pane>
             <Link href='/create?type=bulletin'>
                 <Button
                     iconBefore={AddRowTopIcon}
