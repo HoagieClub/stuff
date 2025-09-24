@@ -1,3 +1,5 @@
+'use client';
+
 import { Heading, Pane, Avatar } from 'evergreen-ui';
 
 import View from '@/components/View';
