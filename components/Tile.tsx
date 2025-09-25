@@ -99,7 +99,7 @@ export default function Tile({ tile }) {
                     </Text>
                 </Pane>
             </Pane>
-            <Pane position='relative' height="125px" width='100%'>
+            <Pane position='relative' height='125px' width='100%'>
                 <Image
                     src={tile.thumbnail}
                     alt={tile.title}
