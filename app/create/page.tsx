@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
 import { withPageAuthRequired } from '@auth0/nextjs-auth0/client';
 import { Spinner } from 'evergreen-ui';
@@ -54,18 +54,6 @@ export default withPageAuthRequired(() => {
             mutate('/api/hoagie/stuff/user');
         }
     };
-
-    useEffect(() => {
-        const queryParams = new URLSearchParams(location.search);
-
-        if (queryParams.has('code')) {
-            queryParams.delete('code');
-            queryParams.delete('state');
-            // TODO: add support for other params to persist using
-            // queryParam.toString() or remove the queryParams method
-            router.replace('/all');
-        }
-    }, [router]);
 
     // TODO: Handle error properly.
     if (!data) {
