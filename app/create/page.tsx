@@ -30,9 +30,13 @@ export default withPageAuthRequired(() => {
             const errorText = await response.text();
             const errorJSON = JSON.parse(errorText);
             if (errorJSON) {
-                setErrorMessage(`There was an issue with your email. ${errorJSON.error}`);
+                setErrorMessage(
+                    `There was an issue with your email. ${errorJSON.error}`
+                );
             } else {
-                setErrorMessage(`There was an issue with your email. ${errorText}`);
+                setErrorMessage(
+                    `There was an issue with your email. ${errorText}`
+                );
             }
         } else {
             setSuccess(true);
