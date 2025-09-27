@@ -53,15 +53,8 @@ export default withPageAuthRequired(() => {
 
         if (!response.ok) {
             const errorText = await response.text();
-            const errorJSON = JSON.parse(errorText);
-
-            if (errorJSON) {
-                setErrorMessage(`There was an issue while performing the deletion. 
-            ${errorJSON.error}`);
-            } else {
-                setErrorMessage(`There was an issue while performing the deletion. 
+            setErrorMessage(`There was an issue while performing the deletion. 
             ${errorText}`);
-            }
             setLoading(false);
         } else {
             // mutate causes useSWR to re-fetch the data,
