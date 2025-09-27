@@ -30,9 +30,13 @@ export default withPageAuthRequired(() => {
             const errorText = await response.text();
             const errorJSON = JSON.parse(errorText);
             if (errorJSON) {
-                setErrorMessage(`There was an issue with your email. ${errorJSON.error}`);
+                setErrorMessage(
+                    `There was an issue with your email. ${errorJSON.error}`
+                );
             } else {
-                setErrorMessage(`There was an issue with your email. ${errorText}`);
+                setErrorMessage(
+                    `There was an issue with your email. ${errorText}`
+                );
             }
         } else {
             setSuccess(true);
@@ -49,8 +53,16 @@ export default withPageAuthRequired(() => {
 
         if (!response.ok) {
             const errorText = await response.text();
-            setErrorMessage(`There was an issue while performing the deletion. 
+            const errorJSON = JSON.parse(errorText);
+
+            if (errorJSON) {
+                setErrorMessage(`There was an issue while performing the deletion. 
+            ${errorJSON.error}`);
+            } else {
+                setErrorMessage(`There was an issue while performing the deletion. 
             ${errorText}`);
+            }
+
             setLoading(false);
         } else {
             // mutate causes useSWR to re-fetch the data,
