@@ -92,7 +92,6 @@ export default function Content({
                     user={user?.user}
                     LogoComponent={RainbowLogo}
                     HeaderComponent={RainbowHeader}
-                    beta
                 />
                 {children}
             </Layout>
