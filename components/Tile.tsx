@@ -105,6 +105,7 @@ export default function Tile({ tile }) {
                     alt={tile.title}
                     fill
                     style={{ objectFit: 'contain' }}
+                    sizes='(max-width: 360px) 100vw, 360px'
                 />
             </Pane>
         </>
