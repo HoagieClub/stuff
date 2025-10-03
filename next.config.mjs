@@ -9,7 +9,12 @@ const nextConfig = {
     }),
     pageExtensions: ['ts', 'tsx', 'js', 'jsx', 'md', 'mdx'],
     images: {
-        domains: ['github.com', 'i.imgur.com'],
+        remotePatterns: [
+            {
+                protocol: 'https',
+                hostname: 'i.imgur.com',
+            },
+        ],
     },
 };
 
