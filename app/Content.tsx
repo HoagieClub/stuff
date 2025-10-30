@@ -81,7 +81,7 @@ export default function Content({
     const tabs = [
         { href: '/all', title: 'All' },
         { href: '/marketplace', title: 'Marketplace' },
-        { href: '/lostfound', title: 'Lost & Found' },
+        { href: '/lost', title: 'Lost & Found' },
         { href: '/bulletins', title: 'Bulletins' },
     ];
     const user = useUser();
