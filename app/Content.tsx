@@ -35,9 +35,6 @@ const RainbowLogo = () => (
         >
             stuff
         </Paragraph>
-        <Text className='hoagie beta' position='absolute' color='grey900'>
-            (BETA)
-        </Text>
     </Pane>
 );
 
@@ -95,7 +92,6 @@ export default function Content({
                     user={user?.user}
                     LogoComponent={RainbowLogo}
                     HeaderComponent={RainbowHeader}
-                    beta
                 />
                 {children}
             </Layout>

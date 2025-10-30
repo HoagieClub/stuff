@@ -1,10 +1,9 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
 import { withPageAuthRequired } from '@auth0/nextjs-auth0/client';
 import { Spinner } from 'evergreen-ui';
-import { useRouter } from 'next/navigation';
 import useSWR, { useSWRConfig } from 'swr';
 
 import ErrorMessage from '@/components/ErrorMessage';
@@ -12,7 +11,6 @@ import MailForm from '@/components/MailForm';
 import View from '@/components/View';
 
 export default withPageAuthRequired(() => {
-    const router = useRouter();
     const { mutate } = useSWRConfig();
     const [errorMessage, setErrorMessage] = useState('');
     const [success, setSuccess] = useState(false);
@@ -28,7 +26,16 @@ export default withPageAuthRequired(() => {
 
         if (!response.ok) {
             const errorText = await response.text();
-            setErrorMessage(`There was an issue with your email. ${errorText}`);
+            const errorJSON = JSON.parse(errorText);
+            if (errorJSON) {
+                setErrorMessage(
+                    `There was an issue with your email. ${errorJSON.error}`
+                );
+            } else {
+                setErrorMessage(
+                    `There was an issue with your email. ${errorText}`
+                );
+            }
         } else {
             setSuccess(true);
         }
@@ -44,8 +51,16 @@ export default withPageAuthRequired(() => {
 
         if (!response.ok) {
             const errorText = await response.text();
-            setErrorMessage(`There was an issue while performing the deletion. 
+            const errorJSON = JSON.parse(errorText);
+
+            if (errorJSON) {
+                setErrorMessage(`There was an issue while performing the deletion. 
+            ${errorJSON.error}`);
+            } else {
+                setErrorMessage(`There was an issue while performing the deletion. 
             ${errorText}`);
+            }
+
             setLoading(false);
         } else {
             // mutate causes useSWR to re-fetch the data,
@@ -54,18 +69,6 @@ export default withPageAuthRequired(() => {
             mutate('/api/hoagie/stuff/user');
         }
     };
-
-    useEffect(() => {
-        const queryParams = new URLSearchParams(location.search);
-
-        if (queryParams.has('code')) {
-            queryParams.delete('code');
-            queryParams.delete('state');
-            // TODO: add support for other params to persist using
-            // queryParam.toString() or remove the queryParams method
-            router.replace('/all');
-        }
-    }, [router]);
 
     // TODO: Handle error properly.
     if (!data) {
