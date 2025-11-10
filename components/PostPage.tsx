@@ -13,18 +13,58 @@ import {
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import useSWR from 'swr';
+import React, { useState, useEffect, useRef } from 'react';
+import useSWRInfinite from 'swr/infinite';
+import { useInView } from 'react-intersection-observer';
 
 import Tile from '@/components/Tile';
 import View from '@/components/View';
 
 export default function PostPage({ pageNumber, category = '' }) {
     const router = useRouter();
-    const perPage = 6;
+    const perPage = 12;
     const fetcher = (url: string) => fetch(url).then((r) => r.json());
-    const query = `/api/hoagie/stuff?limit=${perPage}&offset=${
-        (pageNumber - 1) * perPage
-    }${category !== '' ? `&category=${category}` : ''}`;
-    const { data, isValidating, error } = useSWR(query, fetcher);
+
+    const { ref, inView } = useInView();
+    const [finished, setFinished] = useState(false);
+    const [loadingMore, setLoadingMore] = useState(false);
+
+    const getKey = (pageIndex: number, previousPageData: any) => {
+        if (previousPageData && previousPageData.length === 0) {
+            setFinished(true);
+            return null;
+        }
+        return `/api/hoagie/stuff?limit=${perPage}&offset=${
+            (pageIndex) * perPage
+        }${category !== '' ? `&category=${category}` : ''}`;
+    };
+
+    const { data, error, size, setSize, isValidating } = useSWRInfinite(getKey, fetcher);
+
+    useEffect(() => {
+        if (!data) return;
+        const lastPage = data[data.length - 1];
+        if (Array.isArray(lastPage) && lastPage.length === 0 && !finished) {
+            setFinished(true);
+        }
+    }, [data, finished]);
+
+    const timeoutRef = useRef<NodeJS.Timeout | null>(null);
+    useEffect(() => {
+        if (!inView || finished || loadingMore || isValidating) return;
+
+        if (timeoutRef.current) clearTimeout(timeoutRef.current);
+        const lastPage = data?.[data.length - 1];
+        if (!lastPage || lastPage.length === 0) return;
+
+        timeoutRef.current = setTimeout(async () => {
+        setLoadingMore(true);
+        await setSize((prev) => prev + 1);
+        setLoadingMore(false);
+        }, 150);
+    }, [inView, finished, loadingMore, isValidating, setSize]);
+
+    const posts = data?.flat() || []; 
 
     if (isValidating) {
         return (
@@ -140,35 +180,21 @@ export default function PostPage({ pageNumber, category = '' }) {
                         width='100%'
                         className='grid'
                     >
-                        {data &&
-                            data.map((tile, index) => (
-                                <Tile key={index} tile={tile} />
-                            ))}
+                        {Array.isArray(posts) && posts
+                        .filter((tile) => tile != null)
+                        .map((tile, index) => (
+                            <Tile key={tile.id ?? index} tile={tile} />
+                        ))}
+                        {!finished && (
+                            <div ref={ref} style={{ height: 1, width: '100%' }} />
+                        )}
                     </Pane>
+                    {(isValidating || loadingMore) && (
+                    <Pane display="flex" justifyContent="center" padding={16}>
+                        <Spinner />
+                    </Pane>
+                    )}
                 </Pane>
-            </Pane>
-            <Pane width='100%' display='flex' justifyContent='center'>
-                <Pagination
-                    totalPages={
-                        data.length === perPage ? pageNumber + 1 : pageNumber
-                    }
-                    page={pageNumber}
-                    onPageChange={(page) => {
-                        router.push(
-                            `/${category === '' ? 'all' : category}/${page}`
-                        );
-                    }}
-                    onNextPage={() => {
-                        router.push(
-                            `/${category === '' ? 'all' : category}/${pageNumber + 1}`
-                        );
-                    }}
-                    onPreviousPage={() => {
-                        router.push(
-                            `/${category === '' ? 'all' : category}/${pageNumber - 1}`
-                        );
-                    }}
-                />
             </Pane>
         </View>
     );
