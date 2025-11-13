@@ -11,22 +11,61 @@ import {
     Heading,
 } from 'evergreen-ui';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
-import useSWR from 'swr';
+import useSWRInfinite from 'swr/infinite';
+import React, { useState, useEffect, useRef, useCallback, useMemo } from 'react';
+import { useInView } from 'react-intersection-observer';
 
 import Tile from '@/components/Tile';
 import View from '@/components/View';
 
 export default function PostPage({ pageNumber, category = '' }) {
     const router = useRouter();
-    const perPage = 6;
-    const fetcher = (url: string) => fetch(url).then((r) => r.json());
-    const query = `/api/hoagie/stuff?limit=${perPage}&offset=${
-        (pageNumber - 1) * perPage
-    }${category !== '' ? `&category=${category}` : ''}`;
-    const { data, isValidating, error } = useSWR(query, fetcher);
+    const perPage = 9;
+    const fetcher = useCallback((url: string) => fetch(url).then(r => r.json()), []);
+    
+    const [finished, setFinished] = useState(false);
+    const [loadingMore, setLoadingMore] = useState(false);
 
-    if (isValidating) {
+    const getKey = useCallback((pageIndex: number, previousPageData: any) => {
+        if (previousPageData && previousPageData.length === 0) return null;
+        return `/api/hoagie/stuff?limit=${perPage}&offset=${pageIndex * perPage}${
+        category ? `&category=${category}` : ''
+        }`;
+    }, [category]);
+
+    const { data, error, size, setSize, isValidating } = useSWRInfinite(getKey, fetcher, {
+        revalidateFirstPage: false,
+        revalidateOnFocus: false,
+        revalidateOnReconnect: false,
+    });
+
+    useEffect(() => {
+        if (!data) return;
+        const lastPage = data[data.length - 1];
+        if (Array.isArray(lastPage) && lastPage.length === 0 && !finished) {
+        setFinished(true);
+        }
+    }, [data, finished]);
+
+    const timeoutRef = useRef<NodeJS.Timeout | null>(null);
+
+    useEffect(() => {
+        if (!inView || finished || loadingMore || isValidating) return;
+        if (timeoutRef.current) clearTimeout(timeoutRef.current);
+
+        const lastPage = data?.[data.length - 1];
+        if (!lastPage || lastPage.length === 0) return;
+
+        timeoutRef.current = setTimeout(async () => {
+        setLoadingMore(true);
+        await setSize(prev => prev + 1);
+        setLoadingMore(false);
+        }, 200);
+    }, [inView, finished, loadingMore, isValidating, data, setSize]);
+
+    const posts = useMemo(() => data?.flat().filter(Boolean) || [], [data]);
+
+    const renderContent = () => {
         return (
             <View>
                 <Link href='/create?type=bulletin'>
