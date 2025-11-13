@@ -13,7 +13,7 @@ import {
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import useSWR from 'swr';
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback, useMemo } from 'react';
 import useSWRInfinite from 'swr/infinite';
 import { useInView } from 'react-intersection-observer';
 
@@ -22,14 +22,14 @@ import View from '@/components/View';
 
 export default function PostPage({ pageNumber, category = '' }) {
     const router = useRouter();
-    const perPage = 12;
+    const perPage = 9;
     const fetcher = (url: string) => fetch(url).then((r) => r.json());
 
     const { ref, inView } = useInView();
     const [finished, setFinished] = useState(false);
     const [loadingMore, setLoadingMore] = useState(false);
 
-    const getKey = (pageIndex: number, previousPageData: any) => {
+    const getKey = useCallback((pageIndex: number, previousPageData: any) => {
         if (previousPageData && previousPageData.length === 0) {
             setFinished(true);
             return null;
@@ -37,9 +37,13 @@ export default function PostPage({ pageNumber, category = '' }) {
         return `/api/hoagie/stuff?limit=${perPage}&offset=${
             (pageIndex) * perPage
         }${category !== '' ? `&category=${category}` : ''}`;
-    };
+    });
 
-    const { data, error, size, setSize, isValidating } = useSWRInfinite(getKey, fetcher);
+    const { data, error, size, setSize, isValidating } = useSWRInfinite(getKey, fetcher, {
+        revalidateFirstPage: false,
+        revalidateOnFocus: false,
+        revalidateOnReconnect: false,
+    });
 
     useEffect(() => {
         if (!data) return;
@@ -64,9 +68,9 @@ export default function PostPage({ pageNumber, category = '' }) {
         }, 150);
     }, [inView, finished, loadingMore, isValidating, setSize]);
 
-    const posts = data?.flat() || []; 
+    const posts = useMemo(() => data?.flat().filter(Boolean) || [], [data]);
 
-    if (isValidating) {
+    const renderContent = () => {
         return (
             <View>
                 <Link href='/create?type=bulletin'>
