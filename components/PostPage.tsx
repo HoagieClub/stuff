@@ -187,4 +187,18 @@ export default function PostPage({category = '' }) {
             </Pane>
         </View>
     );
+  };
+
+  return (
+    <View>
+      <Link href="/create?type=bulletin">
+        <Button iconBefore={AddRowTopIcon} height={42} marginTop={20} intent="success" appearance="primary">
+          Create a post
+        </Button>
+      </Link>
+      <Pane display="flex" flexDirection="column" width="100%">
+        {renderContent()}
+      </Pane>
+    </View>
+  );
 }
