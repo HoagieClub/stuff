@@ -99,13 +99,15 @@ export default function Tile({ tile }) {
                     </Text>
                 </Pane>
             </Pane>
-            <Image
-                src={tile.thumbnail}
-                alt={tile.title}
-                width={500}
-                height={200}
-                objectFit='cover'
-            />
+            <Pane position='relative' height='125px' width='100%'>
+                <Image
+                    src={tile.thumbnail}
+                    alt={tile.title}
+                    fill
+                    style={{ objectFit: 'contain' }}
+                    sizes='(max-width: 360px) 100vw, 360px'
+                />
+            </Pane>
         </>
     );
 
