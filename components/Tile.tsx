@@ -111,6 +111,16 @@ export default function Tile({ tile }) {
         </>
     );
 
+    const modalImage = tile.thumbnail && (
+    <Image
+        src={tile.thumbnail}
+        alt={tile.title}
+        width={800}  
+        height={400}  
+        objectFit="cover"
+    />
+);
+
     const categorySection = (
         <Pane paddingX={contentPadding} paddingTop={10}>
             <Badge
@@ -119,7 +129,7 @@ export default function Tile({ tile }) {
                 color={categoryToColor.get(tile.category)}
             >
                 <Pane marginTop={-7} fontSize={14}>
-                    {categoryToName.get(tile.category)}
+                    {categoryToName.get(tile.category)} 
                 </Pane>
             </Badge>
         </Pane>
@@ -204,7 +214,7 @@ export default function Tile({ tile }) {
             >
                 {/* Category */}
                 {categorySection}
-                {/* Price information */}
+                {}
                 {tile.info?.price && (
                     <span
                         style={{
@@ -217,7 +227,7 @@ export default function Tile({ tile }) {
                         ${tile.info.price}
                     </span>
                 )}
-                {/* Image or Description section */}
+                {}
                 {descriptionSection}
                 <Pane paddingTop={30} paddingX={contentPadding}>
                     <span style={{ fontWeight: 600 }}>From: </span>
@@ -281,6 +291,7 @@ export default function Tile({ tile }) {
                 }}
             >
                 {categorySection}
+                {modalImage}  
                 {thumbnail}
                 {tile.description && (
                     <Pane
