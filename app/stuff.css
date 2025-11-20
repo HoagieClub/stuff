@@ -1,0 +1,64 @@
+body {
+    background: #e9ddfe;
+}
+
+.grid {
+    /* Grid Fallback */
+    display: flex;
+    flex-wrap: wrap;
+
+    /* Supports Grid */
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    grid-auto-rows: minmax(150px, auto);
+    grid-gap: 20px;
+    justify-content: center;
+}
+
+.bold {
+    font-weight: 700;
+}
+
+.limited {
+    width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+/* gradient text for modern browsers */
+@supports (background-clip: text) {
+    .rainbow-text {
+        background-image: linear-gradient(
+            70deg,
+            hsl(0deg 64% 68%) 0%,
+            hsl(12deg 82% 71%) 19%,
+            hsl(22deg 94% 72%) 27%,
+            hsl(32deg 100% 73%) 34%,
+            hsl(44deg 81% 71%) 41%,
+            hsl(69deg 49% 66%) 47%,
+            hsl(106deg 42% 69%) 53%,
+            hsl(149deg 44% 65%) 59%,
+            hsl(175deg 54% 54%) 66%,
+            hsl(188deg 100% 44%) 73%,
+            hsl(199deg 97% 56%) 81%,
+            hsl(225deg 100% 76%) 100%
+        );
+        background-clip: text;
+        color: transparent !important;
+    }
+}
+
+@media screen and (max-width: 720px) {
+    .hide-on-mobile {
+        display: none !important;
+    }
+    .only-mobile {
+        display: block;
+    }
+}
+@media screen and (min-width: 720px) {
+    .only-mobile {
+        display: none !important;
+    }
+}

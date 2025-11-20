@@ -1,13 +1,23 @@
+import { useState } from 'react';
+
 import {
-    Button, Pane, Heading, Text, Alert,
-    majorScale, Dialog, InfoSignIcon, Spinner,
+    Button,
+    Pane,
+    Heading,
+    Text,
+    Alert,
+    majorScale,
+    Dialog,
+    InfoSignIcon,
+    Spinner,
 } from 'evergreen-ui';
 import Link from 'next/link';
-import { useRouter } from 'next/router'
-import { useState } from 'react';
-import SuccessPage from '../SuccessPage';
-import ExistingDigest from '../ExistingDigest';
-import ErrorMessage from '../../ErrorMessage';
+import { useRouter, useSearchParams } from 'next/navigation';
+
+import ErrorMessage from '@/components/ErrorMessage';
+import ExistingDigest from '@/components/MailForm/ExistingDigest';
+import SuccessPage from '@/components/MailForm/SuccessPage';
+
 import { GenericForm, LostAndFoundForm, SaleForm } from './Forms';
 
 export default function DigestForm({
@@ -18,22 +28,21 @@ export default function DigestForm({
     onDelete,
 }) {
     const router = useRouter();
-    const [showConfirm, setShowConfirm] = useState(false)
-    const [desc, setDesc] = useState('')
-    const [name, setName] = useState('')
-    const [link, setLink] = useState('')
-    const [thumbnail, setThumbnail] = useState('')
-    const queryParams = router.query
-    const category = typeof queryParams.type === 'string'
-        ? (queryParams.type ?? '') : 'bulletin';
+    const [showConfirm, setShowConfirm] = useState(false);
+    const [desc, setDesc] = useState('');
+    const [name, setName] = useState('');
+    const [link, setLink] = useState('');
+    const [thumbnail, setThumbnail] = useState('');
+    const queryParams = useSearchParams();
+    const category = queryParams.get('type') ?? 'bulletin';
 
     const categoryDefaults = {
         sale: [],
         lost: ['lost'],
         selling: [],
         bulletin: ['announcement'],
-    }
-    const [tags, setTags] = useState(categoryDefaults[category])
+    };
+    const [tags, setTags] = useState(categoryDefaults[category]);
     if (digest.status === 'used') {
         return (
             <ExistingDigest
@@ -52,105 +61,98 @@ export default function DigestForm({
                 size={800}
                 marginTop={majorScale(4)}
                 marginBottom={majorScale(2)}
-            >Create a Post
+            >
+                Create a Post
             </Heading>
             <ErrorMessage text={errorMessage} />
             <Alert
-                intent="none"
-                title="This post will be added to Hoagie Stuff and will also
-                included in the upcoming Hoagie Stuff Digest email."
+                intent='none'
+                title='This post will be added to Hoagie Stuff and will also
+                included in the upcoming Hoagie Stuff Digest email.'
             >
-                Your post will be bundled with others in a weekly digest email as well
-                as listed on the Hoagie Stuff platform for 10 days.
-                Digest emails are sent at noon every Tuesday, Thursday and Saturday.
+                Your post will be bundled with others in a weekly digest email
+                as well as listed on the Hoagie Stuff platform for 10 days.
+                Digest emails are sent at noon every Tuesday, Thursday and
+                Saturday.
             </Alert>
-            <Heading
-                size={600}
-                marginTop={30}
-            >Select Post Type
+            <Heading size={600} marginTop={30}>
+                Select Post Type
             </Heading>
-            <Pane
-                paddingTop={15}
-                paddingBottom={10}
-                display="flex"
-            >
+            <Pane paddingTop={15} paddingBottom={10} display='flex'>
                 <Button
                     appearance={category === 'bulletin' ? 'primary' : 'default'}
                     onClick={() => {
-                        setTags(['announcement'])
-                        router.push('/create?type=bulletin')
+                        setTags(['announcement']);
+                        router.push('/create?type=bulletin');
                     }}
-                >Anything
+                >
+                    Anything
                 </Button>
                 <Button
                     marginLeft={10}
                     appearance={category === 'sale' ? 'primary' : 'default'}
                     onClick={() => {
-                        setTags([])
-                        router.push('/create?type=sale')
+                        setTags([]);
+                        router.push('/create?type=sale');
                     }}
-                >Student Sale
+                >
+                    Student Sale
                 </Button>
 
                 <Button
                     marginLeft={10}
                     appearance={category === 'lost' ? 'primary' : 'default'}
                     onClick={() => {
-                        setTags(['lost'])
-                        router.push('/create?type=lost')
+                        setTags(['lost']);
+                        router.push('/create?type=lost');
                     }}
-                >Lost & Found
+                >
+                    Lost & Found
                 </Button>
             </Pane>
             <br />
-            {
-                category === 'sale' && (
-                    <SaleForm
-                        desc={desc}
-                        link={link}
-                        setDesc={setDesc}
-                        setLink={setLink}
-                        setTags={setTags}
-                    />
-                )
-            }
-            {
-                category === 'lost' && (
-                    <LostAndFoundForm
-                        name={name}
-                        desc={desc}
-                        thumbnail={thumbnail}
-                        setName={setName}
-                        setDesc={setDesc}
-                        setThumbnail={setThumbnail}
-                        setTags={setTags}
-                    />
-                )
-            }
-            {
-                category === 'bulletin' && (
-                    <GenericForm
-                        name={name}
-                        desc={desc}
-                        setName={setName}
-                        setDesc={setDesc}
-                        setTags={setTags}
-                    />
-                )
-            }
-            <Pane
-                paddingTop={20}
-            >
+            {category === 'sale' && (
+                <SaleForm
+                    desc={desc}
+                    link={link}
+                    setDesc={setDesc}
+                    setLink={setLink}
+                    setTags={setTags}
+                />
+            )}
+            {category === 'lost' && (
+                <LostAndFoundForm
+                    name={name}
+                    desc={desc}
+                    thumbnail={thumbnail}
+                    setName={setName}
+                    setDesc={setDesc}
+                    setThumbnail={setThumbnail}
+                    setTags={setTags}
+                />
+            )}
+            {category === 'bulletin' && (
+                <GenericForm
+                    name={name}
+                    desc={desc}
+                    setName={setName}
+                    setDesc={setDesc}
+                    setTags={setTags}
+                />
+            )}
+            <Pane paddingTop={20}>
                 <Button
                     onClick={() => setShowConfirm(true)}
-                    size="large"
-                    appearance="primary"
-                    float="right"
+                    size='large'
+                    appearance='primary'
+                    float='right'
                 >
                     Submit
                 </Button>
-                <Link href="/all">
-                    <Button size="large" float="left">Back</Button>
+                <Link href='/all'>
+                    <Button size='large' float='left'>
+                        Back
+                    </Button>
                 </Link>
             </Pane>
             <br />
@@ -170,41 +172,40 @@ export default function DigestForm({
                     setShowConfirm(false);
                 }}
                 onCloseComplete={() => setShowConfirm(false)}
-                confirmLabel="Add Message"
-                intent="warning"
+                confirmLabel='Add Message'
+                intent='warning'
             >
                 <Pane
                     marginTop={35}
                     marginBottom={20}
-                    fontFamily="Nunito"
-                    display="flex"
-                    alignItems="center"
+                    fontFamily='Nunito'
+                    display='flex'
+                    alignItems='center'
                 >
                     <InfoSignIcon marginRight={10} />
-                    <Text>You are about to add your message
-                        to the weekly Hoagie Digest service.
+                    <Text>
+                        You are about to add your message to the weekly Hoagie
+                        Digest service.
                     </Text>
                 </Pane>
                 <Text>
                     Once you click <b>Submit</b>, Hoagie will append your
-                    message in the upcoming weekly digest email.
-                    This is sent to
+                    message in the upcoming weekly digest email. This is sent to
                     <b> all residential college listservs on your behalf</b>.
-                    Your NetID will be included with your message regardless
-                    of the content.
+                    Your NetID will be included with your message regardless of
+                    the content.
                 </Text>
                 <Alert
-                    intent="warning"
-                    title="Use this tool responsibly"
+                    intent='warning'
+                    title='Use this tool responsibly'
                     marginTop={20}
                 >
-                    If Hoagie Digest is used to send offensive,
-                    intentionally misleading or harmful messages,
-                    the user will be banned from the platform
-                    and, if necessary, reported to the University.
+                    If Hoagie Digest is used to send offensive, intentionally
+                    misleading or harmful messages, the user will be banned from
+                    the platform and, if necessary, reported to the University.
                 </Alert>
             </Dialog>
         </Pane>
-    )
+    );
     return success ? <SuccessPage digest /> : Form;
 }
