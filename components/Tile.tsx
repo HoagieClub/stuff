@@ -199,6 +199,8 @@ export default function Tile({ tile }) {
                 paddingTop={10}
                 paddingBottom={20}
                 position='relative'
+                onClick={() => setShowModal(true)}
+                cursor='pointer'
             >
                 {/* Category */}
                 {categorySection}
@@ -236,6 +238,7 @@ export default function Tile({ tile }) {
                         alignItems='center'
                         borderRight='1px solid #e6e6e6'
                         paddingBottom={15}
+                        onClick={(e) => e.stopPropagation()}
                     >
                         <Pane width='100%'>
                             <a href={link} target='_blank' rel='noreferrer'>
