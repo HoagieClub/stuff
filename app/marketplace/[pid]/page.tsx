@@ -8,8 +8,6 @@ type Params = {
     params: { pid: string };
 };
 
-export default withPageAuthRequired(({ params }: Params) => {
-    const { pid } = params;
-    const pageNumber = pid ? parseInt(pid, 10) : 1;
+export default withPageAuthRequired(() => {
     return <PostPage category='marketplace' />;
 });
