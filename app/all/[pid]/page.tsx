@@ -11,5 +11,5 @@ type Params = {
 export default withPageAuthRequired(({ params }: Params) => {
     const { pid } = params;
     const pageNumber = pid ? parseInt(pid, 10) : 1;
-    return <PostPage pageNumber={pageNumber} />;
+    return <PostPage/>;
 });
