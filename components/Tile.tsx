@@ -76,40 +76,43 @@ export default function Tile({ tile }) {
     }
     const contentPadding = 15;
 
-    const thumbnail = tile.thumbnail && (
-        <>
-            <Pane
-                paddingX={15}
-                paddingY={15}
-                display='flex'
-                alignItems='center'
-            >
-                <Pane width='100%'>
-                    <Text
-                        fontSize={20}
-                        fontWeight={500}
-                        fontFamily='Inter'
-                        marginLeft={5}
-                        width='100%'
-                        overflow='hidden'
-                        textOverflow='ellipsis'
-                        whiteSpace='nowrap'
-                    >
-                        {title}
-                    </Text>
+    const renderThumbnail = (height) =>
+        tile.thumbnail && (
+            <>
+                <Pane
+                    paddingX={15}
+                    paddingY={15}
+                    display='flex'
+                    alignItems='center'
+                >
+                    <Pane width='100%'>
+                        <Text
+                            fontSize={20}
+                            fontWeight={500}
+                            fontFamily='Inter'
+                            marginLeft={5}
+                            width='100%'
+                            overflow='hidden'
+                            textOverflow='ellipsis'
+                            whiteSpace='nowrap'
+                        >
+                            {title}
+                        </Text>
+                    </Pane>
                 </Pane>
-            </Pane>
-            <Pane position='relative' height='125px' width='100%'>
-                <Image
-                    src={tile.thumbnail}
-                    alt={tile.title}
-                    fill
-                    style={{ objectFit: 'contain' }}
-                    sizes='(max-width: 360px) 100vw, 360px'
-                />
-            </Pane>
-        </>
-    );
+                <Pane width='100%' paddingX={contentPadding}>
+                    <Pane position='relative' height={height} width='100%'>
+                        <Image
+                            src={tile.thumbnail}
+                            alt={tile.title}
+                            fill
+                            style={{ objectFit: 'contain' }}
+                            sizes='(max-width: 360px) 100vw, 360px'
+                        />
+                    </Pane>
+                </Pane>
+            </>
+        );
 
     const categorySection = (
         <Pane paddingX={contentPadding} paddingTop={10}>
@@ -132,7 +135,7 @@ export default function Tile({ tile }) {
                 overflow: 'hidden',
             }}
         >
-            {thumbnail}
+            {renderThumbnail('125px')}
             {!tile.thumbnail && (
                 <Pane
                     height={180}
@@ -281,7 +284,7 @@ export default function Tile({ tile }) {
                 }}
             >
                 {categorySection}
-                {thumbnail}
+                {renderThumbnail('400px')}
                 {tile.description && (
                     <Pane
                         paddingTop={15}
