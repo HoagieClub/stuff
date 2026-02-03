@@ -32,7 +32,7 @@ const handler = withApiAuthRequired(async (request: NextRequest, ctx) => {
     }
 
     return await proxyRequest(
-        `${process.env.HOAGIE_API_URL}${path}?${queryString}`,
+        `${process.env.HOAGIE_API_URL}${path}/?${queryString}`,
         fetchReq
     );
 });
