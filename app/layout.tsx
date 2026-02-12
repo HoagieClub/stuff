@@ -2,11 +2,11 @@ import React, { ReactNode } from 'react';
 
 import '@/lib/hoagie-ui/theme.css';
 import '@/app/stuff.css';
-import { UserProvider } from '@auth0/nextjs-auth0/client';
+import { Auth0Provider } from '@auth0/nextjs-auth0';
 import { Metadata } from 'next';
 
 import Content from '@/app/Content';
-import { hoagie } from '@/app/hoagie';
+import hoagie from '@/app/hoagie';
 
 export const metadata: Metadata = {
     title: 'Stuff by Hoagie',
@@ -22,11 +22,11 @@ export default function App({ children }: { children: ReactNode }) {
                     }}
                 />
             </head>
-            <UserProvider>
+            <Auth0Provider>
                 <body>
                     <Content>{children}</Content>
                 </body>
-            </UserProvider>
+            </Auth0Provider>
         </html>
     );
 }
