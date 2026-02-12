@@ -1,10 +1,12 @@
+import { getAccessToken } from '@auth0/nextjs-auth0';
+
 import {
     NextRequest,
     RequestInit,
 } from 'next/dist/server/web/spec-extension/request';
 import { NextResponse } from 'next/server';
 
-import { auth0 } from '@/lib/auth0';
+// import { auth0 } from '@/lib/auth0';
 
 async function handler(
     request: NextRequest,
@@ -24,10 +26,10 @@ async function handler(
     }
 
     try {
-        const accessToken = await auth0.getAccessToken();
+        const accessToken = await getAccessToken();
         fetchReq.headers = {
             ...fetchReq.headers,
-            Authorization: `Bearer ${accessToken.token}`,
+            Authorization: `Bearer ${accessToken}`,
         };
     } catch (error: any) {
         return NextResponse.json({ error: error.message }, { status: 401 });
