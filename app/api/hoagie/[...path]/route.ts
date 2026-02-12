@@ -1,14 +1,16 @@
-import { getAccessToken, withApiAuthRequired } from '@auth0/nextjs-auth0';
 import {
     NextRequest,
     RequestInit,
 } from 'next/dist/server/web/spec-extension/request';
 import { NextResponse } from 'next/server';
 
-const handler = withApiAuthRequired(async (request: NextRequest, ctx) => {
-    // Not very good, fix this later
-    const path = (ctx?.params?.path as string[]).join('/');
-    const queryString = request.nextUrl.searchParams.toString();
+import { auth0 } from '@/lib/auth0';
+
+async function handler(
+    request: NextRequest,
+    { params }: { params: Promise<{ path: string[] }> }
+) {    // Not very good, fix this later
+    const path = (await params).path.join('/');
 
     const fetchReq: RequestInit = {
         method: request.method,
@@ -22,20 +24,20 @@ const handler = withApiAuthRequired(async (request: NextRequest, ctx) => {
     }
 
     try {
-        const { accessToken } = await getAccessToken();
+        const accessToken = await auth0.getAccessToken();
         fetchReq.headers = {
             ...fetchReq.headers,
-            Authorization: `Bearer ${accessToken}`,
+            Authorization: `Bearer ${accessToken.token}`,
         };
     } catch (error: any) {
         return NextResponse.json({ error: error.message }, { status: 401 });
     }
 
     return await proxyRequest(
-        `${process.env.HOAGIE_API_URL}${path}?${queryString}`,
+        `${process.env.HOAGIE_API_URL}${path}`,
         fetchReq
     );
-});
+};
 
 async function proxyRequest(url: string, fetchReq: RequestInit) {
     try {
