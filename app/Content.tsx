@@ -2,7 +2,7 @@
 
 import React, { ReactNode } from 'react';
 
-import { useUser } from '@auth0/nextjs-auth0/client';
+import { useUser } from '@auth0/nextjs-auth0';
 import { Pane, Text, Paragraph } from 'evergreen-ui';
 import { Metadata } from 'next';
 
@@ -74,14 +74,14 @@ export default function Content({
     children,
 }: {
     children: ReactNode;
-}): JSX.Element {
+}): React.JSX.Element {
     const tabs = [
         { href: '/all', title: 'All' },
         { href: '/marketplace', title: 'Marketplace' },
         { href: '/lost', title: 'Lost & Found' },
         { href: '/bulletins', title: 'Bulletins' },
     ];
-    const user = useUser();
+    const { user } = useUser();
 
     return (
         <Theme palette='gray'>
@@ -89,7 +89,7 @@ export default function Content({
                 <Nav
                     name='stuff'
                     tabs={tabs}
-                    user={user?.user}
+                    user={user ?? undefined}
                     LogoComponent={RainbowLogo}
                     HeaderComponent={RainbowHeader}
                 />

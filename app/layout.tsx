@@ -7,12 +7,14 @@ import { Metadata } from 'next';
 
 import Content from '@/app/Content';
 import hoagie from '@/app/hoagie';
+import { auth0 } from '@/lib/auth0';
 
 export const metadata: Metadata = {
     title: 'Stuff by Hoagie',
 };
 
-export default function App({ children }: { children: ReactNode }) {
+export default async function RootLayout({ children, }: { children: ReactNode; }) {
+    const session = await auth0.getSession();
     return (
         <html lang='en'>
             <head>
@@ -22,7 +24,7 @@ export default function App({ children }: { children: ReactNode }) {
                     }}
                 />
             </head>
-            <Auth0Provider>
+            <Auth0Provider user={session?.user}>
                 <body>
                     <Content>{children}</Content>
                 </body>
