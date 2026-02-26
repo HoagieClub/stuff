@@ -12,6 +12,7 @@ async function handler(
     { params }: { params: Promise<{ path: string[] }> }
 ) {    // Not very good, fix this later
     const path = (await params).path.join('/');
+    const queryString = request.nextUrl.searchParams.toString();
 
     const fetchReq: RequestInit = {
         method: request.method,
@@ -35,13 +36,14 @@ async function handler(
     }
 
     return await proxyRequest(
-        `${process.env.HOAGIE_API_URL}${path}`,
+        `${process.env.HOAGIE_API_URL}${path}/?${queryString}`,
         fetchReq
     );
 };
 
 async function proxyRequest(url: string, fetchReq: RequestInit) {
     try {
+        console.log(url);
         const response = await fetch(url, fetchReq);
 
         if (!response.ok) {
