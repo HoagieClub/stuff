@@ -36,14 +36,13 @@ async function handler(
     }
 
     return await proxyRequest(
-        `${process.env.HOAGIE_API_URL}${path}/?${queryString}`,
+        `${process.env.HOAGIE_API_URL}${path}?${queryString}`,
         fetchReq
     );
 };
 
 async function proxyRequest(url: string, fetchReq: RequestInit) {
     try {
-        console.log(url);
         const response = await fetch(url, fetchReq);
 
         if (!response.ok) {
