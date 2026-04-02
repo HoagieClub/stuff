@@ -36,9 +36,7 @@ export default function Content({
                 <Nav
                     name='stuff'
                     tabs={tabs}
-                    user={user ?? undefined}
-                    LogoComponent={RainbowLogo}
-                    HeaderComponent={RainbowHeader}
+                    user={user?.user}
                 />
                 {children}
             </Layout>
