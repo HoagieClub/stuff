@@ -33,11 +33,7 @@ export default function Content({
     return (
         <Theme palette='gray'>
             <Layout>
-                <Nav
-                    name='stuff'
-                    tabs={tabs}
-                    user={user?.user}
-                />
+                <Nav name='stuff' tabs={tabs} user={user?.user} />
                 {children}
             </Layout>
         </Theme>

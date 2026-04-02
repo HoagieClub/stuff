@@ -13,7 +13,11 @@ export const metadata: Metadata = {
     title: 'Stuff by Hoagie',
 };
 
-export default async function RootLayout({ children, }: { children: ReactNode; }) {
+export default async function RootLayout({
+    children,
+}: {
+    children: ReactNode;
+}) {
     const session = await auth0.getSession();
     return (
         <html lang='en'>

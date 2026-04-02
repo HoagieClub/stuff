@@ -1,4 +1,3 @@
-
 import {
     NextRequest,
     RequestInit,
@@ -10,7 +9,8 @@ import { auth0 } from '@/lib/auth0';
 async function handler(
     request: NextRequest,
     { params }: { params: Promise<{ path: string[] }> }
-) {    // Not very good, fix this later
+) {
+    // Not very good, fix this later
     const path = (await params).path.join('/');
     const queryString = request.nextUrl.searchParams.toString();
 
@@ -39,7 +39,7 @@ async function handler(
         `${process.env.HOAGIE_API_URL}${path}?${queryString}`,
         fetchReq
     );
-};
+}
 
 async function proxyRequest(url: string, fetchReq: RequestInit) {
     try {
